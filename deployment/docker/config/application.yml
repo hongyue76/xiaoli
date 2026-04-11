@@ -1,0 +1,39 @@
+# 律法先锋 - Docker 部署配置
+# 该配置会被挂载到容器的 /app/config 目录
+
+spring:
+  application:
+    name: lvboshi-legal
+  profiles:
+    active: prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:xiaoli_legal}
+    username: ${DB_USERNAME:xiaoli}
+    password: ${DB_PASSWORD:Xiaoli@2024}
+  redis:
+    host: ${REDIS_HOST:redis}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:Xiaoli@2024}
+    database: 0
+
+# 日志配置
+logging:
+  level:
+    com.xiaoli: INFO
+    org.springframework: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# 腾讯元器智能体配置
+tencent:
+  yuanqi:
+    base-url: ${TENCENT_YUANQI_BASE_URL:https://api.yuanqi.tencent.com}
+    assistant-id: ${TENCENT_YUANQI_ASSISTANT_ID:your-assistant-id}
+    token: ${TENCENT_YUANQI_TOKEN:your-token}
+    timeout: 60000
+
+# 向量数据库配置
+milvus:
+  host: ${MILVUS_HOST:localhost}
+  port: ${MILVUS_PORT:19530}

@@ -1,0 +1,32 @@
+# 测试环境配置
+spring:
+  # 测试环境Nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:192.168.1.100}:${NACOS_PORT:8848}
+        namespace: test
+
+  # 测试数据库
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:192.168.1.100}:${DB_PORT:5432}/${DB_NAME:test_xiaoli_legal}
+    username: ${DB_USERNAME:test_xiaoli}
+    password: ${DB_PASSWORD:Test@2024}
+
+  # 测试Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:192.168.1.100}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:Test@2024}
+
+# 日志级别 - 测试环境
+logging:
+  level:
+    com.xiaoli.legal: INFO
+    org.springframework: WARN
+
+# 禁用 Swagger
+springdoc:
+  swagger-ui:
+    enabled: false

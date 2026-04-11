@@ -1,0 +1,198 @@
+/* 页面过渡动画基础样式 */
+.page-transition {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: var(--transition-duration, 300ms);
+  animation-delay: var(--transition-delay, 0ms);
+}
+
+/* 淡入淡出动画 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.page-transition-fade {
+  animation-name: fade-in;
+}
+
+.page-transition-fade.page-transition-exit {
+  animation-name: fade-out;
+}
+
+/* 从左侧滑入 */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+.page-transition-slide-left {
+  animation-name: slide-in-left;
+}
+
+.page-transition-slide-left.page-transition-exit {
+  animation-name: slide-out-left;
+}
+
+/* 从右侧滑入 */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+.page-transition-slide-right {
+  animation-name: slide-in-right;
+}
+
+.page-transition-slide-right.page-transition-exit {
+  animation-name: slide-out-right;
+}
+
+/* 从下方滑入 */
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-up {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+.page-transition-slide-up {
+  animation-name: slide-in-up;
+}
+
+.page-transition-slide-up.page-transition-exit {
+  animation-name: slide-out-up;
+}
+
+/* 从上方滑入 */
+@keyframes slide-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.page-transition-slide-down {
+  animation-name: slide-in-down;
+}
+
+.page-transition-slide-down.page-transition-exit {
+  animation-name: slide-out-down;
+}
+
+/* 缩放动画 */
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.page-transition-zoom {
+  animation-name: zoom-in;
+}
+
+.page-transition-zoom.page-transition-exit {
+  animation-name: zoom-out;
+}
+
+/* 减少动画对用户的干扰 */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

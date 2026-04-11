@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xiaoli-config
+  namespace: xiaoli-legal
+data:
+  db.host: "postgres-service"
+  db.port: "5432"
+  db.name: "xiaoli_legal"
+  redis.host: "redis-service"
+  redis.port: "6379"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: xiaoli-secrets
+  namespace: xiaoli-legal
+type: Opaque
+stringData:
+  db.username: "xiaoli"
+  db.password: "Xiaoli@2024"
+  redis.password: "Xiaoli@2024"
+  xiaoli-api-key: "your-api-key"
+  jwt-secret: "your-jwt-secret"

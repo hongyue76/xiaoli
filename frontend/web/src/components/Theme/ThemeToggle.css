@@ -1,0 +1,43 @@
+/* 主题切换按钮 */
+.theme-toggle-button {
+  border-radius: 8px;
+  transition: all 0.3s;
+  height: 40px;
+  padding: 0 16px;
+}
+
+.theme-toggle-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.theme-toggle-button .anticon {
+  font-size: 18px;
+}
+
+/* 主题菜单项 */
+.theme-menu-item {
+  width: 160px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-menu-item span {
+  margin-left: 12px;
+}
+
+.theme-menu-item .check-icon {
+  color: #1890ff;
+  font-size: 14px;
+}
+
+/* 深色模式下的主题切换按钮 */
+[data-theme='dark'] .theme-toggle-button {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme='dark'] .theme-toggle-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

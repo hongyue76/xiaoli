@@ -1,0 +1,96 @@
+/**
+ * 骨架屏样式
+ */
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.skeleton-list-item {
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.skeleton-list-item:hover {
+  background: rgba(0, 58, 140, 0.02);
+}
+
+/* 卡片骨架 */
+.skeleton-card {
+  height: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.1);
+}
+
+/* 文本骨架 */
+.skeleton-text {
+  padding: 16px;
+}
+
+/* 头像骨架 */
+.skeleton-avatars {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+
+/* 输入框骨架 */
+.skeleton-inputs {
+  padding: 16px 0;
+}
+
+/* Ant Design Skeleton 自定义 */
+.skeleton-list-item .ant-skeleton,
+.skeleton-card .ant-skeleton,
+.skeleton-text .ant-skeleton {
+  width: 100%;
+}
+
+/* 骨架屏动画优化 */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 骨架屏进入动画 */
+.skeleton-list,
+.skeleton-card,
+.skeleton-text,
+.skeleton-avatars,
+.skeleton-inputs {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .skeleton-list {
+    gap: 12px;
+  }
+
+  .skeleton-list-item {
+    padding: 8px;
+  }
+
+  .skeleton-card {
+    border-radius: 8px;
+  }
+}

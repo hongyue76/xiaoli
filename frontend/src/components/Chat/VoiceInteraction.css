@@ -1,0 +1,222 @@
+/* 语音交互容器 */
+.voice-interaction {
+  padding: 16px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* 语音控制区域 */
+.voice-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.voice-button {
+  height: 40px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.voice-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 录音信息 */
+.recording-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 77, 79, 0.1);
+  border-radius: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 77, 79, 0);
+  }
+}
+
+.recording-time {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff4d4f;
+}
+
+.recording-indicator {
+  width: 12px;
+  height: 12px;
+  background: #ff4d4f;
+  border-radius: 50%;
+  position: relative;
+}
+
+.recording-indicator .pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: #ff4d4f;
+  border-radius: 50%;
+  animation: ripple 1.5s infinite;
+}
+
+@keyframes ripple {
+  0% {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+
+/* TTS 控制 */
+.tts-controls {
+  display: flex;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+}
+
+.tts-controls .ant-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+/* 声纹可视化 */
+.voice-visualizer {
+  height: 80px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 100%;
+}
+
+.wave-bar {
+  width: 4px;
+  border-radius: 2px;
+  transition: height 0.1s ease;
+  animation: wave 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes wave {
+  0% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(1.2);
+  }
+}
+
+/* 音量控制 */
+.volume-control {
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.volume-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.volume-label {
+  font-size: 14px;
+  color: #595959;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.volume-slider-input {
+  flex: 1;
+}
+
+.volume-slider-input .ant-slider-track {
+  background: linear-gradient(90deg, #1890ff, #40a9ff);
+}
+
+.volume-value {
+  font-size: 14px;
+  color: #262626;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* 响应式设计 */
+@media (max-width: 576px) {
+  .voice-interaction {
+    padding: 12px;
+  }
+
+  .voice-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control-group {
+    justify-content: space-between;
+  }
+
+  .voice-button {
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .recording-info {
+    padding: 6px 12px;
+  }
+
+  .recording-time {
+    font-size: 14px;
+  }
+
+  .voice-visualizer {
+    height: 60px;
+    padding: 12px;
+  }
+
+  .wave-bar {
+    width: 3px;
+  }
+
+  .volume-label,
+  .volume-value {
+    font-size: 12px;
+    min-width: 36px;
+  }
+}

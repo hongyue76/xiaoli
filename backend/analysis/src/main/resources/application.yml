@@ -1,0 +1,91 @@
+server:
+  port: 18085
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: ms-analysis
+
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
+        service: ${spring.application.name}
+        namespace: ${NACOS_NAMESPACE:public}
+        group: ${NACOS_GROUP:xiaoli-legal}
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:xiaoli_legal}
+    username: ${DB_USERNAME:xiaoli}
+    password: ${DB_PASSWORD:Xiaoli@2024}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+      connection-test-query: SELECT 1
+
+  # Redis 配置
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 16
+          max-idle: 8
+          min-idle: 2
+          max-wait: 3000ms
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.xiaoli.legal.analysis.**.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    local-cache-scope: session
+    jdbc-type-for-null: null
+
+tencent:
+  yuanqi:
+    base-url: ${TENCENT_YUANQI_BASE_URL:https://api.yuanqi.tencent.com}
+    assistant-id: ${TENCENT_YUANQI_ASSISTANT_ID:your-assistant-id}
+    token: ${TENCENT_YUANQI_TOKEN:your-token}
+    timeout: 60000
+
+# 案例检索服务配置
+case:
+  search:
+    enabled: true
+    base-url: http://${CASE_HOST:localhost}:${CASE_PORT:18083}
+    timeout: 10000
+
+# 分析增强配置
+analysis:
+  ai:
+    enabled: true
+    max-related-cases: 5
+  fee:
+    enabled: true
+
+logging:
+  level:
+    root: WARN
+    com.xiaoli.legal: INFO
+    com.xiaoli.legal.mapper: DEBUG
+    org.springframework: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
+  file:
+    name: logs/${spring.application.name}.log
+    max-size: 100MB
+    max-history: 30

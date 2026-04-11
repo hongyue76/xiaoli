@@ -1,0 +1,208 @@
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.error-state-compact {
+  padding: 24px;
+}
+
+.error-state-illustration {
+  margin-bottom: 20px;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.error-state:hover .error-state-illustration {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.error-state-compact .error-state-illustration {
+  margin-bottom: 12px;
+}
+
+.error-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.error-state-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.error-state-compact .error-state-title {
+  font-size: 14px;
+}
+
+.error-state-description {
+  font-size: 14px;
+  color: #8c8c8c;
+  line-height: 1.6;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.error-state-compact .error-state-description {
+  font-size: 13px;
+}
+
+.error-state-retry {
+  margin-top: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error-state-retry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.error-state-retry:active {
+  transform: translateY(0);
+}
+
+.error-state-auto-retry {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.auto-retry-countdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #1890ff;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.error-state-extra {
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* 入场动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-state {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* 插画震动动画 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.error-state-illustration svg {
+  animation: shake 0.8s ease-in-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .error-state {
+    padding: 32px 16px;
+  }
+  
+  .error-state-title {
+    font-size: 14px;
+  }
+  
+  .error-state-description {
+    font-size: 13px;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .error-state-title {
+    color: #e8e8e8;
+  }
+  
+  .error-state-description {
+    color: #b8b8b8;
+  }
+  
+  .error-state-auto-retry {
+    color: #b8b8b8;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .error-state,
+  .error-state-illustration svg,
+  .error-state-retry {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* 卡片内错误状态 */
+.card-error-state {
+  border-radius: 8px;
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+}
+
+.card-error-state .error-state-title {
+  color: #cf1322;
+}
+
+/* 列表内错误状态 */
+.list-error-state {
+  min-height: 200px;
+  border-radius: 0;
+}
+
+/* 模态框内错误状态 */
+.modal-error-state {
+  min-height: 300px;
+  background: transparent;
+}
+
+/* 抽屉内错误状态 */
+.drawer-error-state {
+  min-height: 100%;
+  background: #fff2f0;
+}
+
+/* 全屏错误状态 */
+.fullscreen-error-state {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 1000;
+}

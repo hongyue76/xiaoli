@@ -1,0 +1,192 @@
+/* 基础卡片样式增强 */
+.interactive-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 悬停效果 - 上浮 */
+.interactive-card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.interactive-card-lift.clickable:hover {
+  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.2);
+  border-color: #1677ff;
+}
+
+/* 悬停效果 - 发光 */
+.interactive-card-glow:hover {
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.3);
+  border-color: #4096ff;
+}
+
+.interactive-card-glow.clickable:hover {
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.4);
+}
+
+/* 悬停效果 - 边框高亮 */
+.interactive-card-border:hover {
+  border-color: #1677ff;
+  box-shadow: 0 2px 8px rgba(22, 119, 255, 0.2);
+}
+
+.interactive-card-border.clickable:hover {
+  border-width: 2px;
+  border-color: #1677ff;
+  box-shadow: 0 2px 12px rgba(22, 119, 255, 0.3);
+}
+
+/* 悬停效果 - 缩放 */
+.interactive-card-scale:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.interactive-card-scale.clickable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.25);
+}
+
+/* 可点击状态 */
+.interactive-card.clickable {
+  cursor: pointer;
+}
+
+.interactive-card.clickable:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* 加载状态 */
+.interactive-card.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 卡片头部增强 */
+.interactive-card .ant-card-head {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-card-lift:hover .ant-card-head {
+  background-color: #fafafa;
+}
+
+.interactive-card-glow:hover .ant-card-head {
+  background-color: rgba(22, 119, 255, 0.05);
+}
+
+/* 卡片内容区域 */
+.interactive-card .ant-card-body {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-card.clickable .ant-card-body {
+  cursor: pointer;
+}
+
+/* 卡片操作区域 */
+.interactive-card .ant-card-actions {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-card-lift:hover .ant-card-actions {
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 小卡片 */
+.interactive-card.ant-card-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 大卡片 */
+.interactive-card.ant-card-type-inner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 覆盖层效果 */
+.interactive-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.interactive-card:hover::before {
+  opacity: 1;
+}
+
+/* 边框发光动画 */
+@keyframes border-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(22, 119, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.2);
+  }
+}
+
+.interactive-card-glow.clickable:focus {
+  animation: border-glow 1.5s ease-in-out infinite;
+}
+
+/* 波纹效果 */
+.interactive-card.clickable::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(22, 119, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  pointer-events: none;
+}
+
+.interactive-card.clickable:active::after {
+  width: 400px;
+  height: 400px;
+}
+
+/* 减少动画对用户的干扰 */
+@media (prefers-reduced-motion: reduce) {
+  .interactive-card {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .interactive-card::before,
+  .interactive-card::after {
+    display: none;
+  }
+
+  .interactive-card-glow.clickable:focus {
+    animation: none !important;
+  }
+}
+
+/* 暗黑模式支持 */
+@media (prefers-color-scheme: dark) {
+  .interactive-card-lift:hover .ant-card-head {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .interactive-card-glow:hover .ant-card-head {
+    background-color: rgba(22, 119, 255, 0.1);
+  }
+
+  .interactive-card::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  }
+}

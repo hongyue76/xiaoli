@@ -1,0 +1,186 @@
+/* 成功反馈容器 */
+.success-feedback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* 成功反馈内容 */
+.success-feedback-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 成功图标 */
+.success-icon {
+  font-size: 80px;
+  color: #52c41a;
+  opacity: 0;
+  transform: scale(0);
+  animation: success-icon-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.success-animate .success-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes success-icon-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 对勾动画 */
+.success-check {
+  position: absolute;
+  font-size: 60px;
+  color: #ffffff;
+  opacity: 0;
+  animation: success-check-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+.success-animate .success-check {
+  opacity: 1;
+}
+
+@keyframes success-check-in {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* 成功消息 */
+.success-message {
+  font-size: 18px;
+  color: #52c41a;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: success-message-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+
+.success-animate .success-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes success-message-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 退出动画 */
+.success-feedback:not(.success-animate) .success-icon {
+  animation: success-icon-out 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.success-feedback:not(.success-animate) .success-check {
+  animation: success-check-out 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.success-feedback:not(.success-animate) .success-message {
+  animation: success-message-out 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+
+@keyframes success-icon-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes success-check-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes success-message-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* 小尺寸 */
+.success-feedback.small .success-icon {
+  font-size: 48px;
+}
+
+.success-feedback.small .success-check {
+  font-size: 36px;
+}
+
+.success-feedback.small .success-message {
+  font-size: 16px;
+}
+
+/* 大尺寸 */
+.success-feedback.large .success-icon {
+  font-size: 100px;
+}
+
+.success-feedback.large .success-check {
+  font-size: 80px;
+}
+
+.success-feedback.large .success-message {
+  font-size: 20px;
+}
+
+/* 减少动画对用户的干扰 */
+@media (prefers-reduced-motion: reduce) {
+  .success-icon,
+  .success-check,
+  .success-message {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* 暗黑模式支持 */
+@media (prefers-color-scheme: dark) {
+  .success-message {
+    color: #73d13d;
+  }
+}

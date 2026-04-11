@@ -1,0 +1,325 @@
+version: '3.8'
+
+# 法律AI助手 - 完整部署配置
+# 使用方式: docker-compose -f docker-compose.yml up -d
+
+services:
+  # ==================== 基础设施 ====================
+  
+  # PostgreSQL数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: xiaoli-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: xiaoli_legal
+      POSTGRES_USER: xiaoli
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - xiaoli-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xiaoli"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis缓存
+  redis:
+    image: redis:7-alpine
+    container_name: xiaoli-redis
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASSWORD:-Xiaoli@2024} --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - xiaoli-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-Xiaoli@2024}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== 后端服务 ====================
+
+  ms-consult:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-consult
+        SERVICE_PORT: 8081
+    container_name: xiaoli-ms-consult
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-Xiaoli@2024}
+      TENCENT_YUANQI_ASSISTANT_ID: ${TENCENT_YUANQI_ASSISTANT_ID:-your-assistant-id}
+      TENCENT_YUANQI_TOKEN: ${TENCENT_YUANQI_TOKEN:-your-token}
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-document:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-document
+        SERVICE_PORT: 8082
+    container_name: xiaoli-ms-document
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-case:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-case
+        SERVICE_PORT: 8083
+    container_name: xiaoli-ms-case
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-Xiaoli@2024}
+      MILVUS_HOST: milvus
+      MILVUS_PORT: 19530
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-contract:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-contract
+        SERVICE_PORT: 8084
+    container_name: xiaoli-ms-contract
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    ports:
+      - "8084:8084"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  analysis:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: analysis
+        SERVICE_PORT: 8085
+    container_name: xiaoli-analysis
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-decision:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-decision
+        SERVICE_PORT: 8086
+    container_name: xiaoli-ms-decision
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    ports:
+      - "8086:8086"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-compliance:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-compliance
+        SERVICE_PORT: 8087
+    container_name: xiaoli-ms-compliance
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    ports:
+      - "8087:8087"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-evidence:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-evidence
+        SERVICE_PORT: 8088
+    container_name: xiaoli-ms-evidence
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    ports:
+      - "8088:8088"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  ms-speech:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-speech
+        SERVICE_PORT: 8089
+    container_name: xiaoli-ms-speech
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-Xiaoli@2024}
+      XIAOLI_API_KEY: ${XIAOLI_API_KEY:-your-api-key}
+      TENCENT_SECRET_ID: ${TENCENT_SECRET_ID:-}
+      TENCENT_SECRET_KEY: ${TENCENT_SECRET_KEY:-}
+      TENCENT_APP_ID: ${TENCENT_APP_ID:-}
+    ports:
+      - "8089:8089"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  # ==================== 前端 ====================
+  
+  frontend:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.frontend
+    container_name: xiaoli-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - ms-consult
+    networks:
+      - xiaoli-net
+
+networks:
+  xiaoli-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local

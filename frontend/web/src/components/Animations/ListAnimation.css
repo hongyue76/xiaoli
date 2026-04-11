@@ -1,0 +1,122 @@
+/* 列表动画容器 */
+.list-animation-container {
+  display: contents;
+}
+
+/* 列表项动画基础样式 */
+.list-animate-item {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: var(--list-animation-duration, 300ms);
+}
+
+/* 进入状态 */
+.list-animate-item.entering {
+  animation-direction: normal;
+}
+
+/* 退出状态 */
+.list-animate-item.exiting {
+  animation-direction: reverse;
+}
+
+/* 缩放动画 */
+@keyframes list-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.list-animate-scale.entering {
+  animation-name: list-scale-in;
+}
+
+.list-animate-scale.exiting {
+  animation-name: list-scale-in;
+  animation-direction: reverse;
+}
+
+/* 滑动动画 */
+@keyframes list-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.list-animate-slide.entering {
+  animation-name: list-slide-in;
+}
+
+.list-animate-slide.exiting {
+  animation-name: list-slide-in;
+  animation-direction: reverse;
+}
+
+/* 淡入淡出动画 */
+@keyframes list-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.list-animate-fade.entering {
+  animation-name: list-fade-in;
+}
+
+.list-animate-fade.exiting {
+  animation-name: list-fade-in;
+  animation-direction: reverse;
+}
+
+/* 高度动画（用于折叠效果） */
+@keyframes list-height-in {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 200px;
+  }
+}
+
+.list-animate-height.entering {
+  animation-name: list-height-in;
+}
+
+.list-animate-height.exiting {
+  animation-name: list-height-in;
+  animation-direction: reverse;
+}
+
+/* 删除时的特殊效果 */
+.list-animate-item.exiting {
+  pointer-events: none;
+}
+
+/* 减少动画对用户的干扰 */
+@media (prefers-reduced-motion: reduce) {
+  .list-animate-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    max-height: none !important;
+  }
+}

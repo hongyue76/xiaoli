@@ -1,0 +1,11 @@
+.intent-router-demo {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .intent-router-demo {
+    padding: 16px;
+  }
+}

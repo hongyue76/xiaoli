@@ -1,0 +1,102 @@
+/* 虚拟列表容器 */
+.virtual-list-container {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 虚拟列表内容 */
+.virtual-list-content {
+  width: 100%;
+  position: relative;
+}
+
+/* 虚拟列表项 */
+.virtual-list-item {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.virtual-list-item:hover {
+  background-color: #fafafa;
+}
+
+/* 滚动条样式优化 */
+.virtual-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.virtual-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.virtual-list-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.virtual-list-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 加载状态 */
+.virtual-list-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #999;
+}
+
+/* 空状态 */
+.virtual-list-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #999;
+  font-size: 14px;
+}
+
+/* 优化触摸设备上的滚动 */
+@media (max-width: 768px) {
+  .virtual-list-container {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .virtual-list-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 性能优化：使用 will-change 提示浏览器优化 */
+.virtual-list-items {
+  will-change: transform;
+}
+
+/* 暗黑模式支持 */
+@media (prefers-color-scheme: dark) {
+  .virtual-list-item {
+    border-bottom: 1px solid #2c2c2c;
+  }
+
+  .virtual-list-item:hover {
+    background-color: #2c2c2c;
+  }
+
+  .virtual-list-container::-webkit-scrollbar-track {
+    background: #1f1f1f;
+  }
+
+  .virtual-list-container::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  .virtual-list-container::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+}

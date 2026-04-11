@@ -1,0 +1,117 @@
+/* 交错动画容器 */
+.stagger-container {
+  display: contents;
+}
+
+/* 交错动画项 */
+.stagger-item {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: var(--stagger-duration, 300ms);
+  animation-delay: var(--stagger-delay, 0ms);
+}
+
+/* 从下方淡入 */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item-fade-up {
+  animation-name: fade-up;
+}
+
+/* 从上方淡入 */
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item-fade-down {
+  animation-name: fade-down;
+}
+
+/* 从左侧淡入 */
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.stagger-item-fade-left {
+  animation-name: fade-left;
+}
+
+/* 从右侧淡入 */
+@keyframes fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.stagger-item-fade-right {
+  animation-name: fade-right;
+}
+
+/* 缩放进入 */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.stagger-item-scale-in {
+  animation-name: scale-in;
+}
+
+/* 从下方滑入 */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item-slide-up {
+  animation-name: slide-up;
+}
+
+/* 减少动画对用户的干扰 */
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

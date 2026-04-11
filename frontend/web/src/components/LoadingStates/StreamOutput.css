@@ -1,0 +1,185 @@
+/**
+ * 流式输出样式
+ */
+
+.stream-output {
+  margin: 16px 0;
+}
+
+.stream-card {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.08);
+}
+
+/* 流式头部 */
+.stream-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 58, 140, 0.08);
+  margin-bottom: 16px;
+}
+
+.stream-icon {
+  font-size: 16px;
+  color: #003a8c;
+}
+
+.stream-icon.completed {
+  color: #52c41a;
+}
+
+.stream-status {
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+}
+
+/* 流式内容 */
+.stream-content {
+  min-height: 60px;
+}
+
+.stream-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #262626;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.stream-text.streaming {
+  color: #262626;
+}
+
+.stream-text.completed {
+  color: #262626;
+}
+
+/* 光标 */
+.stream-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #003a8c;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 流式底部 */
+.stream-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 58, 140, 0.08);
+}
+
+/* 分段流式输出 */
+.segmented-stream-output {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.segment-card {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.08);
+  transition: all 0.3s ease;
+}
+
+.segment-card.streaming {
+  border-color: #096dd9;
+  box-shadow: 0 4px 12px rgba(0, 58, 140, 0.15);
+}
+
+.segment-card.pending {
+  opacity: 0.5;
+  background: rgba(0, 58, 140, 0.02);
+}
+
+.segment-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(0, 58, 140, 0.1);
+}
+
+.segment-icon {
+  font-size: 14px;
+  color: #003a8c;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.segment-icon.completed {
+  color: #52c41a;
+  animation: none;
+}
+
+.segment-content {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #262626;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 40px;
+}
+
+.pending-placeholder {
+  color: #8c8c8c;
+  font-style: italic;
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .stream-header {
+    padding: 8px 0;
+  }
+
+  .stream-icon {
+    font-size: 14px;
+  }
+
+  .stream-status {
+    font-size: 13px;
+  }
+
+  .stream-text {
+    font-size: 13px;
+  }
+
+  .segment-title {
+    font-size: 14px;
+  }
+
+  .segment-content {
+    font-size: 13px;
+  }
+}

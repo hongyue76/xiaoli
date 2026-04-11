@@ -1,0 +1,87 @@
+/**
+ * 加载按钮样式
+ */
+
+.loading-button {
+  transition: all 0.3s ease;
+}
+
+.loading-button.is-loading {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.loading-button.is-loading:hover {
+  opacity: 0.8;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.loading-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-weight: 500;
+}
+
+/* 不同类型的按钮加载样式 */
+.loading-button.ant-btn-primary.is-loading {
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+}
+
+.loading-button.ant-btn-default.is-loading {
+  border-color: #003a8c;
+  color: #003a8c;
+}
+
+.loading-button.ant-btn-dashed.is-loading {
+  border-color: #003a8c;
+  color: #003a8c;
+}
+
+/* 加载动画 */
+.loading-button .loading-spin .anticon {
+  font-size: 14px;
+}
+
+/* 按钮内部 Spin 覆盖 */
+.loading-button .ant-spin {
+  display: flex;
+  align-items: center;
+}
+
+.loading-button .ant-spin .anticon {
+  margin: 0;
+}
+
+/* 禁用状态 */
+.loading-button:disabled,
+.loading-button[disabled] {
+  cursor: not-allowed;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .loading-content {
+    gap: 6px;
+  }
+
+  .loading-text {
+    font-size: 13px;
+  }
+}

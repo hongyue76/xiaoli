@@ -1,0 +1,155 @@
+/**
+ * 进度条样式
+ */
+
+.progress-card {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.95) 100%);
+}
+
+/* 进度头部 */
+.progress-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+
+.progress-icon {
+  font-size: 24px;
+  color: #003a8c;
+}
+
+.progress-message {
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+}
+
+/* 进度条 */
+.progress-bar {
+  margin-bottom: 20px;
+}
+
+/* 步骤条 */
+.progress-steps {
+  margin-top: 20px;
+}
+
+.progress-steps-vertical {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+/* 线型进度条包装 */
+.progress-line-wrapper {
+  padding: 16px;
+  background: rgba(0, 58, 140, 0.02);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.progress-line-wrapper .progress-message {
+  display: block;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* 圆形进度条包装 */
+.progress-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 16px;
+}
+
+/* 仪表盘进度条包装 */
+.progress-dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 24px;
+}
+
+/* Ant Design Steps 自定义 */
+.progress-steps .ant-steps-item-process .ant-steps-item-icon,
+.progress-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  border-color: #003a8c;
+}
+
+.progress-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background: #52c41a;
+  border-color: #52c41a;
+}
+
+.progress-steps .ant-steps-item-title {
+  font-weight: 500;
+  color: #262626;
+}
+
+.progress-steps .ant-steps-item-description {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* Ant Design Progress 自定义 */
+.ant-progress-bg {
+  border-radius: 4px !important;
+}
+
+.ant-progress-circle .ant-progress-text {
+  font-weight: 600;
+  color: #003a8c;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.progress-icon {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .progress-header {
+    gap: 8px;
+  }
+
+  .progress-icon {
+    font-size: 20px;
+  }
+
+  .progress-message {
+    font-size: 13px;
+  }
+
+  .progress-circle-wrapper,
+  .progress-dashboard-wrapper {
+    padding: 16px;
+  }
+
+  .progress-steps .ant-steps-item-title {
+    font-size: 13px;
+  }
+
+  .progress-steps .ant-steps-item-description {
+    font-size: 11px;
+  }
+}

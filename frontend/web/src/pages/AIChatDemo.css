@@ -1,0 +1,191 @@
+/* 演示页面样式 */
+.ai-chat-demo {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  min-height: 100vh;
+}
+
+/* 头部 */
+.demo-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.demo-header .ant-typography {
+  margin-bottom: 8px;
+}
+
+/* 功能标签 */
+.demo-features {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.feature-tag {
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.feature-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 分隔线 */
+.ai-chat-demo .ant-divider {
+  margin: 32px 0;
+}
+
+/* 演示内容 */
+.demo-content {
+  margin-bottom: 32px;
+}
+
+.chat-card {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.chat-card .ant-card-head {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-bottom: none;
+}
+
+.chat-card .ant-card-head-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chat-card .ant-card-body {
+  padding: 0;
+  background: #f5f7fa;
+}
+
+.chat-container {
+  height: 800px;
+  padding: 16px;
+}
+
+/* 功能说明 */
+.demo-description {
+  margin-top: 32px;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .ant-card-body {
+  padding: 20px;
+}
+
+.feature-card h5 {
+  color: #1890ff;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.feature-card .ant-typography {
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .ai-chat-demo {
+    padding: 16px;
+  }
+
+  .chat-container {
+    height: 700px;
+  }
+
+  .feature-list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-chat-demo {
+    padding: 12px;
+  }
+
+  .demo-header .ant-typography h2 {
+    font-size: 20px;
+  }
+
+  .demo-features {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .feature-tag {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .chat-card .ant-card-head-title {
+    font-size: 16px;
+  }
+
+  .chat-container {
+    height: 600px;
+    padding: 12px;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-chat-demo .ant-divider {
+    margin: 24px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .ai-chat-demo {
+    padding: 8px;
+  }
+
+  .chat-container {
+    height: 500px;
+    padding: 8px;
+  }
+
+  .feature-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .feature-card h5 {
+    font-size: 14px;
+  }
+
+  .feature-card .ant-typography {
+    font-size: 13px;
+  }
+}

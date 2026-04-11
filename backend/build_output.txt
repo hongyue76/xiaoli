@@ -1,0 +1,601 @@
+﻿[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] 律法先锋                                                               [pom]
+[INFO] Common Core                                                        [jar]
+[INFO] AI 公共模块                                                            [jar]
+[INFO] 向量数据库核心                                                            [jar]
+[INFO] PDF文档核心                                                            [jar]
+[INFO] OCR识别核心                                                            [jar]
+[INFO] ms-consult                                                         [jar]
+[INFO] ms-document                                                        [jar]
+[INFO] ms-caseinfo                                                        [jar]
+[INFO] ms-contract                                                        [jar]
+[INFO] 语音对话服务模块                                                           [jar]
+[INFO] ms-analysis                                                        [jar]
+[INFO] 司法辅助决策模块                                                           [jar]
+[INFO] 企业合规管理模块                                                           [jar]
+[INFO] ms-evidence                                                        [jar]
+[INFO] 意图路由核心模块                                                           [jar]
+[INFO] 
+[INFO] ---------------------< com.xiaoli.ai:xiaoli-legal >---------------------
+[INFO] Building 律法先锋 1.0.0                                               [1/16]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ xiaoli-legal ---
+[INFO] 
+[INFO] ---------------------< com.xiaoli.ai:common-core >----------------------
+[INFO] Building Common Core 1.0.0                                        [2/16]
+[INFO]   from common\common-core\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ common-core ---
+[INFO] Deleting D:\me\project\xiaoli\backend\common\common-core\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-core ---
+[INFO] skip non existing resourceDirectory D:\me\project\xiaoli\backend\common\common-core\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ common-core ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 32 source files with javac [debug target 17] to target\classes
+[INFO] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java: D:\me\project\xiaoli\backend\common\common-core\src\main\java\com\xiaoli\legal\common\core\security\JwtTokenProvider.java使用或覆盖了已过时的 API。
+[INFO] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[40,50] 找不到符号
+  符号:   类 Timeout
+  位置: 类 feign.FeignException
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/filter/TraceIdFilter.java:[27,69] 此处需要接口
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[39,37] 找不到符号
+  符号:   类 Timeout
+  位置: 类 feign.FeignException
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/filter/TraceIdInterceptor.java:[43,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.filter.TraceIdInterceptor
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[23,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.config.FeignExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[32,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.config.FeignExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[41,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.config.FeignExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterExampleController.java:[105,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterExampleController
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterExampleController.java:[128,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterExampleController
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RedisRateLimiterService.java:[109,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RedisRateLimiterService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RedisRateLimiterService.java:[126,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RedisRateLimiterService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RedisRateLimiterService.java:[140,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RedisRateLimiterService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[16,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[23,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[30,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[37,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/AsyncConfig.java:[53,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.config.AsyncConfig
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/AsyncConfig.java:[61,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.config.AsyncConfig
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtAuthenticationFilter.java:[54,17] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtAuthenticationFilter
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtAuthenticationFilter.java:[71,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtAuthenticationFilter
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[125,17] 找不到符号
+  符号:   方法 parserBuilder()
+  位置: 类 io.jsonwebtoken.Jwts
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[131,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[133,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[135,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[137,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[139,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[166,20] 找不到符号
+  符号:   方法 parserBuilder()
+  位置: 类 io.jsonwebtoken.Jwts
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[32,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[45,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[58,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[71,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[83,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[94,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[102,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/CurrentUserArgumentResolver.java:[41,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.CurrentUserArgumentResolver
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/CurrentUserArgumentResolver.java:[52,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.security.CurrentUserArgumentResolver
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[41,34] 找不到符号
+  符号:   方法 getUsername()
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[49,17] 找不到符号
+  符号:   方法 setAccessToken(java.lang.String)
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[50,17] 找不到符号
+  符号:   方法 setRefreshToken(java.lang.String)
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[51,17] 找不到符号
+  符号:   方法 setUserId(java.lang.Long)
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[52,17] 找不到符号
+  符号:   方法 setUsername(java.lang.String)
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[53,17] 找不到符号
+  符号:   方法 setRoles(java.util.List<java.lang.String>)
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[64,52] 找不到符号
+  符号:   方法 getRefreshToken()
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[69,72] 找不到符号
+  符号:   方法 getRefreshToken()
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[70,66] 找不到符号
+  符号:   方法 getRefreshToken()
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[77,17] 找不到符号
+  符号:   方法 setAccessToken(java.lang.String)
+  位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimitExceptionHandler.java:[33,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimitExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimitExceptionHandler.java:[33,64] 找不到符号
+  符号:   方法 getKey()
+  位置: 类型为com.xiaoli.legal.common.core.ratelimiter.RateLimitException的变量 ex
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/filter/TraceIdFilter.java:[33,5] 方法不会覆盖或实现超类型的方法
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignConfig.java:[43,16] feign.Retryer是抽象的; 无法实例化
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[40,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[41,29] 找不到符号
+  符号:   方法 getCode()
+  位置: 类型为com.xiaoli.legal.common.core.exception.BusinessException的变量 e
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[56,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[70,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[84,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[94,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[106,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[116,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[126,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[138,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[150,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[162,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[174,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[186,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[198,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[210,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[222,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[234,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterAspect.java:[61,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterAspect
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterAspect.java:[115,13] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterAspect
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheConfig.java:[64,5] 方法不会覆盖或实现超类型的方法
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheConfig.java:[142,5] 方法不会覆盖或实现超类型的方法
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheConfig.java:[144,39] 无法将接口 org.springframework.cache.annotation.CachingConfigurer中的方法 cacheResolver应用到给定类型;
+  需要: 没有参数
+  找到:    org.springframework.cache.CacheManager
+  原因: 实际参数列表和形式参数列表长度不同
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[35,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[51,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[67,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[84,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[97,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[105,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[31,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[44,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[57,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[70,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[83,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[97,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[109,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[119,9] 找不到符号
+  符号:   变量 log
+  位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/UserPrincipal.java:[114,29] 找不到符号
+  符号:   方法 builder()
+  位置: 类 com.xiaoli.legal.common.core.security.UserPrincipal
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/UserPrincipal.java:[131,29] 找不到符号
+  符号:   方法 builder()
+  位置: 类 com.xiaoli.legal.common.core.security.UserPrincipal
+[INFO] 89 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for 律法先锋 1.0.0:
+[INFO] 
+[INFO] 律法先锋 ............................................... SUCCESS [  0.156 s]
+[INFO] Common Core ........................................ FAILURE [  2.261 s]
+[INFO] AI 公共模块 ............................................ SKIPPED
+[INFO] 向量数据库核心 ............................................ SKIPPED
+[INFO] PDF文档核心 ............................................ SKIPPED
+[INFO] OCR识别核心 ............................................ SKIPPED
+[INFO] ms-consult ......................................... SKIPPED
+[INFO] ms-document ........................................ SKIPPED
+[INFO] ms-caseinfo ........................................ SKIPPED
+[INFO] ms-contract ........................................ SKIPPED
+[INFO] 语音对话服务模块 ........................................... SKIPPED
+[INFO] ms-analysis ........................................ SKIPPED
+[INFO] 司法辅助决策模块 ........................................... SKIPPED
+[INFO] 企业合规管理模块 ........................................... SKIPPED
+[INFO] ms-evidence ........................................ SKIPPED
+[INFO] 意图路由核心模块 ........................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.756 s
+[INFO] Finished at: 2026-04-02T17:39:10+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project common-core: Compilation failure: Compilation failure: 
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[40,50] 找不到符号
+[ERROR]   符号:   类 Timeout
+[ERROR]   位置: 类 feign.FeignException
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/filter/TraceIdFilter.java:[27,69] 此处需要接口
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[39,37] 找不到符号
+[ERROR]   符号:   类 Timeout
+[ERROR]   位置: 类 feign.FeignException
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/filter/TraceIdInterceptor.java:[43,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.filter.TraceIdInterceptor
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[23,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.config.FeignExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[32,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.config.FeignExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignExceptionHandler.java:[41,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.config.FeignExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterExampleController.java:[105,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterExampleController
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterExampleController.java:[128,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterExampleController
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RedisRateLimiterService.java:[109,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RedisRateLimiterService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RedisRateLimiterService.java:[126,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RedisRateLimiterService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RedisRateLimiterService.java:[140,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RedisRateLimiterService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[16,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[23,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[30,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheErrorHandler.java:[37,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.RedisCacheErrorHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/AsyncConfig.java:[53,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.config.AsyncConfig
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/AsyncConfig.java:[61,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.config.AsyncConfig
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtAuthenticationFilter.java:[54,17] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtAuthenticationFilter
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtAuthenticationFilter.java:[71,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtAuthenticationFilter
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[125,17] 找不到符号
+[ERROR]   符号:   方法 parserBuilder()
+[ERROR]   位置: 类 io.jsonwebtoken.Jwts
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[131,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[133,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[135,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[137,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[139,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.JwtTokenProvider
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/JwtTokenProvider.java:[166,20] 找不到符号
+[ERROR]   符号:   方法 parserBuilder()
+[ERROR]   位置: 类 io.jsonwebtoken.Jwts
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[32,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[45,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[58,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[71,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[83,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[94,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/LawArticleCacheService.java:[102,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.LawArticleCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/CurrentUserArgumentResolver.java:[41,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.CurrentUserArgumentResolver
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/CurrentUserArgumentResolver.java:[52,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.CurrentUserArgumentResolver
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[41,34] 找不到符号
+[ERROR]   符号:   方法 getUsername()
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[49,17] 找不到符号
+[ERROR]   符号:   方法 setAccessToken(java.lang.String)
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[50,17] 找不到符号
+[ERROR]   符号:   方法 setRefreshToken(java.lang.String)
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[51,17] 找不到符号
+[ERROR]   符号:   方法 setUserId(java.lang.Long)
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[52,17] 找不到符号
+[ERROR]   符号:   方法 setUsername(java.lang.String)
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[53,17] 找不到符号
+[ERROR]   符号:   方法 setRoles(java.util.List<java.lang.String>)
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.LoginResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[64,52] 找不到符号
+[ERROR]   符号:   方法 getRefreshToken()
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[69,72] 找不到符号
+[ERROR]   符号:   方法 getRefreshToken()
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[70,66] 找不到符号
+[ERROR]   符号:   方法 getRefreshToken()
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenRequest的变量 request
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/AuthController.java:[77,17] 找不到符号
+[ERROR]   符号:   方法 setAccessToken(java.lang.String)
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.security.AuthController.RefreshTokenResponse的变量 response
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimitExceptionHandler.java:[33,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimitExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimitExceptionHandler.java:[33,64] 找不到符号
+[ERROR]   符号:   方法 getKey()
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.ratelimiter.RateLimitException的变量 ex
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/filter/TraceIdFilter.java:[33,5] 方法不会覆盖或实现超类型的方法
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/config/FeignConfig.java:[43,16] feign.Retryer是抽象的; 无法实例化
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[40,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[41,29] 找不到符号
+[ERROR]   符号:   方法 getCode()
+[ERROR]   位置: 类型为com.xiaoli.legal.common.core.exception.BusinessException的变量 e
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[56,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[70,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[84,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[94,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[106,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[116,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[126,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[138,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[150,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[162,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[174,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[186,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[198,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[210,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[222,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/exception/GlobalExceptionHandler.java:[234,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.exception.GlobalExceptionHandler
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterAspect.java:[61,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterAspect
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/ratelimiter/RateLimiterAspect.java:[115,13] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.ratelimiter.RateLimiterAspect
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheConfig.java:[64,5] 方法不会覆盖或实现超类型的方法
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheConfig.java:[142,5] 方法不会覆盖或实现超类型的方法
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/RedisCacheConfig.java:[144,39] 无法将接口 org.springframework.cache.annotation.CachingConfigurer中的方法 cacheResolver应用到给定类型;
+[ERROR]   需要: 没有参数
+[ERROR]   找到:    org.springframework.cache.CacheManager
+[ERROR]   原因: 实际参数列表和形式参数列表长度不同
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[35,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[51,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[67,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[84,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[97,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/CaseSearchCacheService.java:[105,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.CaseSearchCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[31,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[44,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[57,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[70,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[83,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[97,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[109,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/cache/UserCacheService.java:[119,9] 找不到符号
+[ERROR]   符号:   变量 log
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.cache.UserCacheService
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/UserPrincipal.java:[114,29] 找不到符号
+[ERROR]   符号:   方法 builder()
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.UserPrincipal
+[ERROR] /D:/me/project/xiaoli/backend/common/common-core/src/main/java/com/xiaoli/legal/common/core/security/UserPrincipal.java:[131,29] 找不到符号
+[ERROR]   符号:   方法 builder()
+[ERROR]   位置: 类 com.xiaoli.legal.common.core.security.UserPrincipal
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :common-core

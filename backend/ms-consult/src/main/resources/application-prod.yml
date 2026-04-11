@@ -1,0 +1,52 @@
+# 生产环境配置
+spring:
+  # 生产环境Nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:prod-nacos.example.com}:${NACOS_PORT:8848}
+        namespace: prod
+        group: xiaoli-legal-prod
+
+  # 生产数据库 - 生产环境通过环境变量注入
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50
+
+  # 生产Redis
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+      lettuce:
+        pool:
+          max-active: 32
+          max-idle: 16
+          min-idle: 4
+
+# 日志级别 - 生产环境最小化
+logging:
+  level:
+    root: WARN
+    com.xiaoli.legal: WARN
+    org.springframework: ERROR
+
+# 禁用 Swagger
+springdoc:
+  swagger-ui:
+    enabled: false
+
+# 生产环境安全
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

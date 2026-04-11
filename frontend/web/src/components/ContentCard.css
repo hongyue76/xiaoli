@@ -1,0 +1,176 @@
+/**
+ * 内容卡片样式
+ */
+
+.content-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 阴影级别 */
+.content-card.shadow-light {
+  box-shadow: 0 1px 4px rgba(0, 58, 140, 0.06);
+}
+
+.content-card.shadow-default {
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.1);
+}
+
+.content-card.shadow-heavy {
+  box-shadow: 0 4px 16px rgba(0, 58, 140, 0.15);
+}
+
+/* 悬停效果 */
+.content-card.hoverable:hover {
+  box-shadow: 0 4px 12px rgba(0, 58, 140, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(0, 58, 140, 0.2);
+}
+
+.content-card.shadow-heavy.hoverable:hover {
+  box-shadow: 0 6px 20px rgba(0, 58, 140, 0.2);
+}
+
+/* 渐变背景 */
+.content-card.gradient {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.95) 100%);
+}
+
+/* 卡片头部装饰 */
+.content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #003a8c 0%, #faad14 50%, #003a8c 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.content-card.hoverable:hover::before {
+  transform: scaleX(1);
+}
+
+/* Ant Design Card 头部覆盖 */
+.content-card .ant-card-head {
+  border-bottom: 1px solid rgba(0, 58, 140, 0.08);
+  padding: 16px 24px;
+  background: linear-gradient(135deg, rgba(0, 58, 140, 0.02) 0%, rgba(250, 173, 20, 0.02) 100%);
+}
+
+.content-card .ant-card-head-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.content-card .ant-card-body {
+  padding: 24px;
+}
+
+/* 卡片内容区域统一样式 */
+.content-card p {
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+.content-card h1,
+.content-card h2,
+.content-card h3,
+.content-card h4,
+.content-card h5,
+.content-card h6 {
+  color: var(--color-primary);
+  margin: 16px 0 12px 0;
+}
+
+.content-card h1:first-child,
+.content-card h2:first-child,
+.content-card h3:first-child,
+.content-card h4:first-child,
+.content-card h5:first-child,
+.content-card h6:first-child {
+  margin-top: 0;
+}
+
+/* 列表样式 */
+.content-card ul,
+.content-card ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.content-card li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+/* 代码块样式 */
+.content-card code {
+  background: rgba(0, 58, 140, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.content-card pre {
+  background: rgba(0, 58, 140, 0.03);
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.content-card pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .content-card .ant-card-head {
+    padding: 12px 16px;
+  }
+
+  .content-card .ant-card-body {
+    padding: 16px;
+  }
+
+  .content-card .ant-card-head-title {
+    font-size: 14px;
+  }
+}
+
+/* 动画效果 */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-card {
+  animation: cardAppear 0.4s ease-out;
+}
+
+/* 多卡片网格布局时的交错动画 */
+.content-card:nth-child(1) { animation-delay: 0.05s; }
+.content-card:nth-child(2) { animation-delay: 0.1s; }
+.content-card:nth-child(3) { animation-delay: 0.15s; }
+.content-card:nth-child(4) { animation-delay: 0.2s; }
+.content-card:nth-child(5) { animation-delay: 0.25s; }
+.content-card:nth-child(6) { animation-delay: 0.3s; }

@@ -1,0 +1,33 @@
+# ===========================================
+# 律法先锋 - 本地配置文件模板
+# ===========================================
+# 复制此文件为 application-local.yml 并填入实际配置
+# 此文件已被 .gitignore 忽略，不会被上传到 GitHub
+
+# ============ DeepSeek API ============
+deepseek:
+  api:
+    key: sk-your-deepseek-api-key-here
+    base-url: https://api.deepseek.com
+    model: deepseek-chat
+
+# ============ 得理法搜 API ============
+delilegal:
+  base-url: https://openapi.delilegal.com
+  app-id: your-app-id
+  secret: your-secret
+  api-key: your-delilegal-api-key
+  timeout: 30000
+
+# ============ 数据库配置 ============
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/xiaoli_legal
+    username: your-username
+    password: your-password
+
+# ============ 腾讯云配置 ============
+tencent:
+  secret-id: your-secret-id
+  secret-key: your-secret-key
+  app-id: your-app-id

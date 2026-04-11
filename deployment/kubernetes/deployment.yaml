@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xiaoli-backend
+  namespace: xiaoli-legal
+  labels:
+    app: xiaoli
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: xiaoli
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: xiaoli
+        tier: backend
+    spec:
+      containers:
+      - name: ms-consult
+        image: xiaoli-ms-consult:latest
+        ports:
+        - containerPort: 8081
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: xiaoli-config
+              key: db.host
+        - name: XIAOLI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: xiaoli-secrets
+              key: xiaoli-api-key
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xiaoli-backend
+  namespace: xiaoli-legal
+spec:
+  selector:
+    app: xiaoli
+    tier: backend
+  ports:
+  - name: consult
+    port: 8081
+    targetPort: 8081
+  - name: document
+    port: 8082
+    targetPort: 8082
+  - name: case
+    port: 8083
+    targetPort: 8083
+  - name: contract
+    port: 8084
+    targetPort: 8084
+  - name: analysis
+    port: 8085
+    targetPort: 8085
+  - name: decision
+    port: 8086
+    targetPort: 8086
+  - name: compliance
+    port: 8087
+    targetPort: 8087
+  - name: evidence
+    port: 8088
+    targetPort: 8088
+  - name: speech
+    port: 8089
+    targetPort: 8089
+  type: ClusterIP

@@ -1,0 +1,427 @@
+/**
+ * 律法先锋 - 法律专业主题配色方案
+ *
+ * 设计理念：
+ * - 深蓝色主色调：体现法律专业性和权威感
+ * - 金色点缀：象征公正和正义
+ * - 青灰色背景：提升质感，减轻视觉疲劳
+ * - 渐变效果：增强现代感和层次感
+ */
+
+/* ==================== 主题变量定义 ==================== */
+:root {
+  /* 主色调 - 深蓝色系列 */
+  --color-primary: #003a8c;           /* 深蓝色 - 主色调 */
+  --color-primary-light: #096dd9;     /* 浅蓝 - 交互状态 */
+  --color-primary-lighter: #40a9ff;   /* 更浅蓝 - 强调 */
+  --color-primary-dark: #002766;      /* 深蓝 - 按压状态 */
+
+  /* 辅助色 - 金色/橙色 */
+  --color-gold: #faad14;              /* 金色 - 公正象征 */
+  --color-gold-light: #ffc53d;        /* 浅金 */
+  --color-gold-dark: #d48806;         /* 深金 */
+
+  /* 中性色 */
+  --color-text-primary: #1f1f1f;      /* 主文本 */
+  --color-text-secondary: #595959;     /* 次要文本 */
+  --color-text-tertiary: #8c8c8c;     /* 第三级文本 */
+  --color-text-disabled: #bfbfbf;      /* 禁用文本 */
+
+  /* 背景色 */
+  --color-bg-primary: #ffffff;        /* 主背景 */
+  --color-bg-secondary: #f5f7fa;       /* 次要背景 - 青灰色 */
+  --color-bg-tertiary: #fafafa;       /* 第三级背景 */
+  --color-bg-disabled: #f5f5f5;       /* 禁用背景 */
+
+  /* 边框色 */
+  --color-border-base: #d9d9d9;       /* 基础边框 */
+  --color-border-light: #e8e8e8;      /* 浅色边框 */
+  --color-border-dark: #bfbfbf;       /* 深色边框 */
+
+  /* 成功/警告/错误 */
+  --color-success: #52c41a;           /* 成功 */
+  --color-warning: #faad14;           /* 警告（复用金色） */
+  --color-error: #f5222d;             /* 错误 */
+  --color-info: #1890ff;              /* 信息 */
+
+  /* 功能色 */
+  --color-law-blue: #003a8c;          /* 法律蓝 */
+  --color-justice-gold: #d48806;      /* 正义金 */
+  --color-neutral-gray: #8c8c8c;      /* 中性灰 */
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 58, 140, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 58, 140, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 58, 140, 0.16);
+  --shadow-xl: 0 16px 32px rgba(0, 58, 140, 0.2);
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* 渐变 */
+  --gradient-primary: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  --gradient-gold: linear-gradient(135deg, #faad14 0%, #ffc53d 100%);
+  --gradient-blue-gold: linear-gradient(135deg, #003a8c 0%, #faad14 100%);
+  --gradient-subtle: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+}
+
+/* ==================== Ant Design 主题覆盖 ==================== */
+
+/* 覆盖 Ant Design 默认主色 */
+:root {
+  --ant-primary-color: var(--color-primary);
+  --ant-success-color: var(--color-success);
+  --ant-warning-color: var(--color-warning);
+  --ant-error-color: var(--color-error);
+  --ant-info-color: var(--color-info);
+}
+
+/* 按钮样式优化 */
+.ant-btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #096dd9 0%, #40a9ff 100%);
+  box-shadow: 0 4px 12px rgba(0, 58, 140, 0.4);
+  transform: translateY(-2px);
+}
+
+.ant-btn-primary:active {
+  background: var(--color-primary-dark);
+  transform: translateY(0);
+}
+
+/* 卡片样式优化 */
+.ant-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border-light);
+}
+
+.ant-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.ant-card-head {
+  background: var(--gradient-subtle);
+  border-bottom: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.ant-card-head-title {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 输入框样式 */
+.ant-input,
+.ant-input-textarea {
+  border-radius: var(--radius-md);
+  border-color: var(--color-border-light);
+  transition: all 0.3s ease;
+}
+
+.ant-input:hover,
+.ant-input-textarea:hover {
+  border-color: var(--color-primary-light);
+}
+
+.ant-input:focus,
+.ant-input-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 58, 140, 0.1);
+}
+
+/* 选择器样式 */
+.ant-select-selector {
+  border-radius: var(--radius-md) !important;
+  border-color: var(--color-border-light) !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(0, 58, 140, 0.1) !important;
+}
+
+/* 表格样式 */
+.ant-table {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.ant-table-thead > tr > th {
+  background: var(--gradient-subtle);
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: rgba(0, 58, 140, 0.04);
+}
+
+/* 标签样式 */
+.ant-tag {
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  font-weight: 500;
+}
+
+.ant-tag-blue {
+  background: rgba(0, 58, 140, 0.1);
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 58, 140, 0.2);
+}
+
+.ant-tag-gold {
+  background: rgba(250, 173, 20, 0.1);
+  color: var(--color-gold-dark);
+  border: 1px solid rgba(250, 173, 20, 0.2);
+}
+
+/* 标签页样式 */
+.ant-tabs .ant-tabs-tab {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.ant-tabs .ant-tabs-tab-active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.ant-tabs-ink-bar {
+  background: var(--gradient-primary);
+  height: 3px;
+}
+
+/* 菜单样式 */
+.ant-menu {
+  background: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-border-light);
+}
+
+.ant-menu-item-selected {
+  background: var(--gradient-primary) !important;
+  color: #ffffff !important;
+}
+
+.ant-menu-item:hover {
+  background: rgba(0, 58, 140, 0.1);
+}
+
+/* 警告框样式 */
+.ant-alert {
+  border-radius: var(--radius-md);
+  border-left-width: 4px;
+}
+
+.ant-alert-warning {
+  background: rgba(250, 173, 20, 0.08);
+  border-left-color: var(--color-gold);
+}
+
+.ant-alert-info {
+  background: rgba(0, 58, 140, 0.08);
+  border-left-color: var(--color-primary);
+}
+
+/* ==================== 自定义组件样式 ==================== */
+
+/* 法律主题按钮 */
+.btn-legal {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 8px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-legal:hover {
+  background: linear-gradient(135deg, #096dd9 0%, #40a9ff 100%);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.btn-legal:active {
+  transform: translateY(0);
+}
+
+/* 金色强调按钮 */
+.btn-gold {
+  background: var(--gradient-gold);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 8px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(250, 173, 20, 0.3);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #ffc53d 0%, #ffe58f 100%);
+  box-shadow: 0 4px 12px rgba(250, 173, 20, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 法律主题卡片 */
+.card-legal {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-light);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card-legal:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-legal-header {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  padding: 16px 24px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.card-legal-body {
+  padding: 24px;
+}
+
+/* 统计卡片 */
+.card-stat {
+  background: var(--gradient-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  border: 1px solid var(--color-border-light);
+  transition: all 0.3s ease;
+}
+
+.card-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-stat-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 功能区块 */
+.section-legal {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border-light);
+}
+
+.section-legal-title {
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-primary);
+  display: flex;
+  align-items: center;
+}
+
+.section-legal-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--gradient-gold);
+  margin-right: 12px;
+  border-radius: 2px;
+}
+
+/* ==================== 背景纹理 ==================== */
+
+/* 法律主题背景 */
+.bg-legal-pattern {
+  background-color: var(--color-bg-secondary);
+  background-image:
+    linear-gradient(135deg, rgba(0, 58, 140, 0.02) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(0, 58, 140, 0.02) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(0, 58, 140, 0.02) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(0, 58, 140, 0.02) 25%, transparent 25%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 0, 10px -10px, 0 10px;
+}
+
+/* 渐变背景 */
+.bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.bg-gradient-subtle {
+  background: var(--gradient-subtle);
+}
+
+/* ==================== 文字颜色 ==================== */
+
+.text-legal-primary {
+  color: var(--color-primary);
+}
+
+.text-legal-gold {
+  color: var(--color-gold-dark);
+}
+
+/* ==================== 动画效果 ==================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ==================== 响应式调整 ==================== */
+
+@media (max-width: 768px) {
+  :root {
+    --radius-sm: 2px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+    --radius-xl: 14px;
+  }
+
+  .card-legal,
+  .section-legal {
+    padding: 16px;
+  }
+}

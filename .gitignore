@@ -1,0 +1,104 @@
+# ===========================================
+# 律法先锋 - Gitignore 配置文件
+# ===========================================
+
+# ============ 系统文件 ============
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ============ Java / Maven ============
+backend/target/
+backend/**/*.class
+backend/**/*.jar
+backend/**/*.war
+backend/**/*.ear
+backend/**/*.log
+backend/**/pom.xml.tag
+backend/**/pom.xml.releaseBackup
+backend/**/pom.xml.versionsBackup
+backend/**/.mvn/wrapper/maven-wrapper.jar
+backend/**/.mvn/wrapper/maven-wrapper.properties
+
+# ============ Node.js ============
+frontend/web/node_modules/
+frontend/web/dist/
+frontend/web/.cache/
+frontend/web/.parcel-cache/
+frontend/web/coverage/
+frontend/**/package-lock.json
+frontend/**/yarn.lock
+
+# ============ IDE 配置 ============
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+
+# ============ 构建产物 ============
+**/target/
+**/build/
+**/out/
+**/dist/
+**/.gradle/
+**/bin/
+**/obj/
+**/*.class
+**/*.o
+**/*.obj
+
+# ============ 日志和临时文件 ============
+*.log
+logs/
+*.tmp
+*.bak
+*.swp
+*~
+
+# ============ 配置文件（敏感）============
+# 不要上传包含实际密钥的配置文件
+application-local.yml
+application-local.properties
+application-dev.yml
+application-dev.properties
+.env
+.env.local
+.env.*.local
+**/application-local*.yml
+**/application-local*.properties
+**/application-secrets*.yml
+
+# ============ 数据库 ============
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/data/
+
+# ============ Docker ============
+deployment/docker/data/
+deployment/docker/logs/
+
+# ============ 其他 ============
+*.bak
+*.orig
+*.rej
+*.tmp
+.cache/
+temp/
+tmp/
+
+# ============ 测试输出 ============
+**/test-output/
+**/surefire-reports/
+**/test-reports/
+
+# ============ 编译缓存 ============
+**/.classpath
+**/.project
+**/.settings/
+**/.factorypath

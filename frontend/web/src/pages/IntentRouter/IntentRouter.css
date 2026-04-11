@@ -1,0 +1,77 @@
+.intent-router-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 100%);
+  min-height: 100%;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 58, 140, 0.2);
+  color: #ffffff;
+}
+
+.page-header h2 {
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+}
+
+.stat-card {
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 58, 140, 0.08);
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 58, 140, 0.15);
+}
+
+.stat-card .ant-statistic-title {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.stat-card .ant-statistic-content {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.guide-content,
+.architecture-content {
+  padding: 16px;
+}
+
+.guide-content .ant-card,
+.architecture-content .ant-card {
+  box-shadow: 0 2px 12px rgba(0, 58, 140, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+}
+
+.guide-content pre,
+.architecture-content pre {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+  background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  border-radius: 8px;
+}

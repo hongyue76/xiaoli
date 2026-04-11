@@ -1,0 +1,42 @@
+# 多阶段构建 - 法律AI助手前端
+
+# 阶段1: 构建阶段
+FROM node:18-alpine AS builder
+
+LABEL maintainer="xiaoli-legal"
+LABEL version="1.0.0"
+
+# 设置时区
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
+WORKDIR /build
+
+# 复制package文件
+COPY frontend/web/package.json frontend/web/package-lock.json* ./
+
+# 安装依赖
+RUN npm ci --registry=https://registry.npmmirror.com
+
+# 复制源码
+COPY frontend/web/ ./
+
+# 构建生产版本
+RUN npm run build
+
+# 阶段2: 运行阶段
+FROM nginx:1.25-alpine
+
+# 复制构建产物
+COPY --from=builder /build/dist /usr/share/nginx/html
+
+# 复制nginx配置
+COPY deployment/docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY deployment/docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+
+# 暴露端口
+EXPOSE 80
+
+# 启动nginx
+CMD ["nginx", "-g", "daemon off;"]

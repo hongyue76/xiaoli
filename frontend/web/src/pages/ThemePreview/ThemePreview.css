@@ -1,0 +1,137 @@
+.theme-preview-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 100%);
+  min-height: 100%;
+}
+
+.preview-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 58, 140, 0.2);
+  color: #ffffff;
+}
+
+.preview-header h2 {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+}
+
+.preview-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  margin: 0;
+}
+
+.color-scheme,
+.components-preview,
+.gradients-preview {
+  padding: 16px;
+}
+
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.color-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.color-box.primary {
+  background: #003a8c;
+}
+
+.color-box.primary-light {
+  background: #096dd9;
+}
+
+.color-box.primary-lighter {
+  background: #40a9ff;
+}
+
+.color-box.primary-dark {
+  background: #002766;
+}
+
+.color-box.gold {
+  background: #faad14;
+}
+
+.color-box.gold-light {
+  background: #ffc53d;
+}
+
+.color-box.gold-dark {
+  background: #d48806;
+}
+
+.color-box.success {
+  background: #52c41a;
+}
+
+.color-box.warning {
+  background: #faad14;
+}
+
+.color-box.error {
+  background: #f5222d;
+}
+
+.color-box.info {
+  background: #1890ff;
+}
+
+.gradient-card {
+  padding: 32px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradient-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.gradient-card.primary-gradient {
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  color: #ffffff;
+}
+
+.gradient-card.gold-gradient {
+  background: linear-gradient(135deg, #faad14 0%, #ffc53d 100%);
+  color: #ffffff;
+}
+
+.gradient-card.blue-gold-gradient {
+  background: linear-gradient(135deg, #003a8c 0%, #faad14 100%);
+  color: #ffffff;
+}
+
+.gradient-card.subtle-gradient {
+  background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+  border: 1px solid rgba(0, 58, 140, 0.1);
+}

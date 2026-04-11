@@ -1,0 +1,220 @@
+/**
+ * 步骤引导组件样式
+ */
+
+.step-wizard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* 进度条 */
+.wizard-progress {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 250, 0.95) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.08);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #003a8c;
+}
+
+.time-estimate {
+  font-size: 13px;
+  color: #8c8c8c;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 步骤指示器 */
+.wizard-steps {
+  margin-bottom: 24px;
+}
+
+.wizard-steps .ant-steps-item-process .ant-steps-item-icon {
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  border-color: #003a8c;
+}
+
+.wizard-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background: #52c41a;
+  border-color: #52c41a;
+}
+
+.wizard-steps .ant-steps-item-title {
+  font-weight: 500;
+  color: #262626;
+}
+
+.wizard-steps .ant-steps-item-description {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* 分隔线 */
+.step-divider {
+  margin: 16px 0 24px 0;
+}
+
+/* 步骤卡片 */
+.wizard-card {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 58, 140, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.08);
+  background: linear-gradient(135deg, #ffffff 0%, rgba(245, 247, 250, 0.5) 100%);
+  transition: all 0.3s ease;
+}
+
+.wizard-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 58, 140, 0.12);
+}
+
+/* 步骤头部 */
+.wizard-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(0, 58, 140, 0.1);
+}
+
+.wizard-header .ant-typography {
+  margin-bottom: 8px;
+}
+
+.wizard-header .ant-typography-title {
+  color: #003a8c;
+}
+
+.step-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(0, 58, 140, 0.05);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* 步骤内容 */
+.wizard-content {
+  min-height: 300px;
+  margin-bottom: 24px;
+}
+
+/* 验证错误 */
+.validation-error {
+  padding: 12px 16px;
+  background: rgba(250, 173, 20, 0.1);
+  border: 1px solid rgba(250, 173, 20, 0.3);
+  border-left: 4px solid #faad14;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 步骤底部操作栏 */
+.wizard-footer {
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 58, 140, 0.1);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 按钮样式 */
+.wizard-footer .ant-btn {
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.wizard-footer .ant-btn-primary {
+  background: linear-gradient(135deg, #003a8c 0%, #096dd9 100%);
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 58, 140, 0.3);
+}
+
+.wizard-footer .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #096dd9 0%, #40a9ff 100%);
+  box-shadow: 0 4px 12px rgba(0, 58, 140, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .step-wizard {
+    padding: 16px;
+  }
+
+  .wizard-progress {
+    margin-bottom: 20px;
+    padding: 16px;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .wizard-steps .ant-steps-item-title {
+    font-size: 13px;
+  }
+
+  .wizard-steps .ant-steps-item-description {
+    display: none;
+  }
+
+  .wizard-content {
+    min-height: 250px;
+  }
+
+  .wizard-footer .ant-space {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wizard-footer .ant-btn {
+    flex: 1;
+  }
+}
+
+/* 步骤切换动画 */
+.wizard-content {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

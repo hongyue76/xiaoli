@@ -1,0 +1,71 @@
+# 多阶段构建 - 法律AI助手后端服务
+
+# 阶段1: 构建阶段
+FROM maven:3.9-eclipse-temurin-17 AS builder
+
+WORKDIR /build
+
+# 复制pom文件
+COPY backend/pom.xml .
+COPY backend/common/pom.xml backend/common/
+COPY backend/ms-consult/pom.xml backend/ms-consult/
+COPY backend/ms-document/pom.xml backend/ms-document/
+COPY backend/ms-caseinfo/pom.xml backend/ms-caseinfo/
+COPY backend/ms-contract/pom.xml backend/ms-contract/
+COPY backend/analysis/pom.xml backend/analysis/
+COPY backend/ms-decision/pom.xml backend/ms-decision/
+COPY backend/ms-compliance/pom.xml backend/ms-compliance/
+COPY backend/ms-evidence/pom.xml backend/ms-evidence/
+COPY backend/ms-speech/pom.xml backend/ms-speech/
+
+# 下载依赖
+RUN mvn dependency:go-offline -B
+
+# 复制源码
+COPY backend/common/common-core/src common/common-core/src
+COPY backend/ms-consult/src ms-consult/src
+COPY backend/ms-document/src ms-document/src
+COPY backend/ms-caseinfo/src ms-caseinfo/src
+COPY backend/ms-contract/src ms-contract/src
+COPY backend/analysis/src analysis/src
+COPY backend/ms-decision/src ms-decision/src
+COPY backend/ms-compliance/src ms-compliance/src
+COPY backend/ms-evidence/src ms-evidence/src
+COPY backend/ms-speech/src ms-speech/src
+
+# 构建JAR包
+RUN mvn clean package -DskipTests -B
+
+# 阶段2: 运行阶段
+FROM eclipse-temurin:17-jre-alpine
+
+# 接收构建参数：服务名称
+ARG SERVICE_NAME
+ARG SERVICE_PORT
+
+LABEL maintainer="xiaoli-legal"
+LABEL version="1.0.0"
+LABEL service="${SERVICE_NAME}"
+LABEL description="Legal AI Assistant - ${SERVICE_NAME} Service"
+
+# 设置时区
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
+# 创建应用目录
+RUN mkdir -p /app/{config,logs,static}
+
+WORKDIR /app
+
+# 复制对应服务的JAR包
+COPY --from=builder /build/${SERVICE_NAME}/target/*.jar app.jar
+
+# 复制配置文件
+COPY deployment/docker/config/*.yml config/
+
+# 暴露指定服务端口
+EXPOSE ${SERVICE_PORT}
+
+# 启动命令 - 只启动指定的服务
+ENTRYPOINT ["sh", "-c", "java -Xms256m -Xmx512m -jar app.jar --spring.config.location=file:./config/"]
