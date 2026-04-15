@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # 数据库
+  postgres:
+    image: registry.cn-hangzhou.aliyuncs.com/library/postgres:15-alpine
+    container_name: xiaoli-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: xiaoli_legal
+      POSTGRES_USER: xiaoli
+      POSTGRES_PASSWORD: Xiaoli@2024
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xiaoli"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 前端
+  frontend:
+    image: registry.cn-hangzhou.aliyuncs.com/library/nginx:alpine
+    container_name: xiaoli-frontend
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+
+  # 后端（使用Node.js简化版）
+  backend:
+    image: registry.cn-hangzhou.aliyuncs.com/library/node:18-alpine
+    container_name: xiaoli-backend
+    restart: always
+    working_dir: /app
+    command: sh -c "npm init -y && npm install express cors && node server.js"
+    environment:
+      - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=xiaoli_legal
+      - DB_USER=xiaoli
+      - DB_PASSWORD=Xiaoli@2024
+    volumes:
+      - ./backend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  default:
+    name: xiaoli-net
+
+volumes:
+  postgres_data:
