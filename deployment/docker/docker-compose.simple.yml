@@ -1,0 +1,115 @@
+version: '3.8'
+
+# ===========================================
+# 律法先锋 - 简化版一键部署配置（适合学生机）
+# 
+# 使用方式:
+#   1. 上传到服务器
+#   2. 运行: bash deploy.sh
+#
+# 仅启动核心服务：前端 + 咨询API + 数据库
+# ===========================================
+
+services:
+  # ==================== 数据库 ====================
+  postgres:
+    image: postgres:15-alpine
+    container_name: xiaoli-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: xiaoli_legal
+      POSTGRES_USER: xiaoli
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - xiaoli-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xiaoli"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== 核心API服务 ====================
+  ms-consult:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-consult
+        SERVICE_PORT: 8081
+    container_name: xiaoli-ms-consult
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      # DeepSeek API（必须配置）
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      # 得理法搜 API（必须配置）
+      DELILEGAL_APP_ID: ${DELILEGAL_APP_ID:-}
+      DELILEGAL_SECRET: ${DELILEGAL_SECRET:-}
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  # ==================== 案例检索服务 ====================
+  ms-case:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+      args:
+        SERVICE_NAME: ms-case
+        SERVICE_PORT: 8083
+    container_name: xiaoli-ms-case
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: xiaoli_legal
+      DB_USERNAME: xiaoli
+      DB_PASSWORD: ${DB_PASSWORD:-Xiaoli@2024}
+      DELILEGAL_APP_ID: ${DELILEGAL_APP_ID:-}
+      DELILEGAL_SECRET: ${DELILEGAL_SECRET:-}
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - xiaoli-net
+
+  # ==================== 前端 ====================
+  frontend:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.frontend
+    container_name: xiaoli-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - ms-consult
+    networks:
+      - xiaoli-net
+
+networks:
+  xiaoli-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

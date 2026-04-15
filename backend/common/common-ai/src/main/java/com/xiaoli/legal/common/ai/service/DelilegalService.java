@@ -25,4 +25,20 @@ public interface DelilegalService {
      * @return 法规列表JSON
      */
     String searchLaws(String keywords, String fieldName);
+
+    /**
+     * 获取法规详情
+     * @param lawId 法规ID
+     * @param merge 是否合并内容
+     * @return 法规详情JSON，包含 lawDetailContent 字段
+     */
+    String getLawDetail(String lawId, boolean merge);
+
+    /**
+     * 批量获取法规详情（并发优化）
+     * @param lawIds 法规ID列表
+     * @param merge 是否合并内容
+     * @return 法规详情列表JSON
+     */
+    String getBatchLawDetails(List<String> lawIds, boolean merge);
 }

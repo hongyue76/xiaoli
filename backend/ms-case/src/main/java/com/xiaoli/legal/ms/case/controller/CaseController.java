@@ -217,6 +217,9 @@ public class CaseController {
     /**
      * 得理法搜法规检索
      * 接口地址：https://openapi.delilegal.com/api/qa/v3/search/queryListLaw
+     * 
+     * @param request 包含 keywords, fieldName, autoFetchDetail(可选，默认true)
+     * @return 法规列表JSON，如果 autoFetchDetail=true 则自动获取完整内容
      */
     @PostMapping("/delilegal/law")
     public Result<String> searchLawsByDelilegal(@RequestBody java.util.Map<String, Object> request) {
@@ -233,12 +236,175 @@ public class CaseController {
         }
 
         String fieldName = request.getOrDefault("fieldName", "title").toString();
+        
+        // 是否自动获取完整内容（默认开启）
+        boolean autoFetchDetail = true;
+        if (request.containsKey("autoFetchDetail")) {
+            autoFetchDetail = Boolean.TRUE.equals(request.get("autoFetchDetail"));
+        }
 
         if (keywords == null || keywords.isEmpty()) {
             return Result.fail("keywords参数不能为空");
         }
 
+        // 先获取法规列表
         String result = delilegalService.searchLaws(String.join(",", keywords), fieldName);
+        
+        // 如果开启自动获取详情
+        if (autoFetchDetail) {
+            try {
+                result = enrichLawsWithDetails(result);
+            } catch (Exception e) {
+                log.error("自动获取法规详情失败，继续返回原始结果", e);
+                // 不中断流程，返回原始结果
+            }
+        }
+        
         return Result.success(result);
+    }
+
+    /**
+     * 获取法规详情
+     * 接口地址：https://openapi.delilegal.com/api/qa/v3/search/lawInfo
+     * 
+     * @param lawId 法规ID（必填）
+     * @param merge 是否合并内容（默认true，返回完整正文）
+     * @return 法规详情JSON，包含 lawDetailContent 字段
+     */
+    @GetMapping("/delilegal/law/detail")
+    public Result<String> getLawDetail(
+            @RequestParam String lawId,
+            @RequestParam(defaultValue = "true") boolean merge) {
+        log.info("得理法搜法规详情请求: lawId={}, merge={}", lawId, merge);
+        
+        if (lawId == null || lawId.isEmpty()) {
+            return Result.fail("lawId参数不能为空");
+        }
+        
+        String result = delilegalService.getLawDetail(lawId, merge);
+        return Result.success(result);
+    }
+
+    /**
+     * 批量获取法规详情（并发优化）
+     * 
+     * @param lawIds 法规ID列表（逗号分隔或JSON数组）
+     * @param merge 是否合并内容（默认true）
+     * @return 法规详情列表JSON，失败项标记 fullContent: null
+     */
+    @PostMapping("/delilegal/law/batch")
+    public Result<String> getBatchLawDetails(
+            @RequestParam String lawIds,
+            @RequestParam(defaultValue = "true") boolean merge) {
+        log.info("得理法搜批量法规详情请求: lawIds={}, merge={}", lawIds, merge);
+        
+        List<String> lawIdList;
+        if (lawIds.startsWith("[")) {
+            // JSON数组格式
+            lawIdList = com.alibaba.fastjson2.JSON.parseArray(lawIds, String.class);
+        } else {
+            // 逗号分隔格式
+            lawIdList = Arrays.asList(lawIds.split(","));
+        }
+        
+        if (lawIdList == null || lawIdList.isEmpty()) {
+            return Result.fail("lawIds参数不能为空");
+        }
+        
+        String result = delilegalService.getBatchLawDetails(lawIdList, merge);
+        return Result.success(result);
+    }
+
+    /**
+     * 增强法规检索结果，自动获取每个法规的完整内容
+     * 
+     * @param lawsJson 法规检索返回的JSON
+     * @return 增强后的JSON，包含 fullContent 字段
+     */
+    private String enrichLawsWithDetails(String lawsJson) {
+        com.alibaba.fastjson2.JSONObject response = 
+            com.alibaba.fastjson2.JSON.parseObject(lawsJson);
+        
+        if (response == null) {
+            return lawsJson;
+        }
+        
+        // 提取法规列表（根据实际返回结构调整）
+        com.alibaba.fastjson2.JSONArray lawList = null;
+        
+        // 尝试不同的可能字段名
+        if (response.containsKey("data")) {
+            Object data = response.get("data");
+            if (data instanceof com.alibaba.fastjson2.JSONArray) {
+                lawList = (com.alibaba.fastjson2.JSONArray) data;
+            } else if (data instanceof com.alibaba.fastjson2.JSONObject) {
+                lawList = ((com.alibaba.fastjson2.JSONObject) data).getJSONArray("list");
+            }
+        } else if (response.containsKey("result")) {
+            Object result = response.get("result");
+            if (result instanceof com.alibaba.fastjson2.JSONArray) {
+                lawList = (com.alibaba.fastjson2.JSONArray) result;
+            }
+        } else if (response.containsKey("laws")) {
+            lawList = response.getJSONArray("laws");
+        }
+        
+        if (lawList == null || lawList.isEmpty()) {
+            log.info("未找到法规列表，跳过详情获取");
+            return lawsJson;
+        }
+        
+        log.info("开始批量获取 {} 个法规的详情", lawList.size());
+        
+        // 收集所有 lawId
+        List<String> lawIds = new java.util.ArrayList<>();
+        for (int i = 0; i < lawList.size(); i++) {
+            com.alibaba.fastjson2.JSONObject law = lawList.getJSONObject(i);
+            String lawId = law.getString("id");
+            if (lawId != null) {
+                lawIds.add(lawId);
+            }
+        }
+        
+        // 批量获取详情
+        String batchResult = delilegalService.getBatchLawDetails(lawIds, true);
+        List<com.alibaba.fastjson2.JSONObject> details = 
+            com.alibaba.fastjson2.JSON.parseArray(batchResult, com.alibaba.fastjson2.JSONObject.class);
+        
+        // 建立 lawId -> 详情的映射
+        Map<String, com.alibaba.fastjson2.JSONObject> detailMap = new java.util.HashMap<>();
+        if (details != null) {
+            for (com.alibaba.fastjson2.JSONObject detail : details) {
+                detailMap.put(detail.getString("lawId"), detail);
+            }
+        }
+        
+        // 将详情合并到原法规对象
+        for (int i = 0; i < lawList.size(); i++) {
+            com.alibaba.fastjson2.JSONObject law = lawList.getJSONObject(i);
+            String lawId = law.getString("id");
+            
+            if (lawId != null && detailMap.containsKey(lawId)) {
+                com.alibaba.fastjson2.JSONObject detail = detailMap.get(lawId);
+                law.put("fullContent", detail.get("fullContent"));
+                law.put("fullContentPreview", detail.get("fullContentPreview"));
+                law.put("detailSuccess", detail.get("success"));
+                
+                if (detail.getBoolean("success") == null || !detail.getBoolean("success")) {
+                    law.put("detailError", detail.get("error"));
+                }
+            } else {
+                law.put("fullContent", null);
+                law.put("fullContentPreview", null);
+                law.put("detailSuccess", false);
+                law.put("detailError", "未找到对应详情");
+            }
+        }
+        
+        log.info("法规详情获取完成，成功: {}/{}", 
+            lawList.stream().filter(l -> l.getBoolean("detailSuccess")).count(),
+            lawList.size());
+        
+        return com.alibaba.fastjson2.JSON.toJSONString(response);
     }
 }
