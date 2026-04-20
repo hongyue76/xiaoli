@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>律法先锋 - API 测试</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #333; margin-bottom: 20px; text-align: center; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .status { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .online { background: #4caf50; }
+        .offline { background: #f44336; }
+        textarea { width: 100%; height: 100px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-size: 14px; resize: vertical; }
+        button { background: #1976d2; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #1565c0; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .response { background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; padding: 15px; margin-top: 15px; white-space: pre-wrap; font-family: monospace; font-size: 13px; max-height: 300px; overflow-y: auto; }
+        .error { color: #f44336; }
+        .success { color: #4caf50; }
+        label { display: block; margin-bottom: 5px; color: #666; font-weight: 500; }
+        .info { font-size: 12px; color: #888; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚖️ 律法先锋 API 测试</h1>
+        
+        <div class="card">
+            <div class="status">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">检测中...</span>
+            </div>
+            <button onclick="checkHealth()">🔄 刷新状态</button>
+        </div>
+
+        <div class="card">
+            <label>法律咨询问题：</label>
+            <textarea id="question" placeholder="请输入您的法律问题，例如：我可以起诉邻居吗？">你好，请问我可以起诉邻居吗？</textarea>
+            <div class="info">输入您想咨询的法律问题</div>
+            <br>
+            <button id="submitBtn" onclick="submitQuestion()">提交咨询</button>
+        </div>
+
+        <div class="card">
+            <label>API 响应：</label>
+            <div class="response" id="response">等待请求...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:18081';
+        
+        async function checkHealth() {
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            
+            try {
+                const res = await fetch(`${API_BASE}/actuator/health`);
+                if (res.ok) {
+                    dot.className = 'status-dot online';
+                    text.textContent = '✅ 服务在线';
+                    text.className = 'success';
+                } else {
+                    throw new Error('服务异常');
+                }
+            } catch (e) {
+                dot.className = 'status-dot offline';
+                text.textContent = '❌ 服务离线: ' + e.message;
+                text.className = 'error';
+            }
+        }
+
+        async function submitQuestion() {
+            const btn = document.getElementById('submitBtn');
+            const question = document.getElementById('question').value;
+            const responseDiv = document.getElementById('response');
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ 发送中...';
+            responseDiv.textContent = '请求中...';
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/consult/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        messages: [{ role: 'user', content: question }]
+                    })
+                });
+                
+                const data = await res.json();
+                responseDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                responseDiv.textContent = '❌ 请求失败: ' + e.message;
+                responseDiv.style.color = '#f44336';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '提交咨询';
+            }
+        }
+
+        // 初始检查
+        checkHealth();
+    </script>
+</body>
+</html>

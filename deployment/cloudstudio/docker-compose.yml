@@ -1,0 +1,126 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: xiaoli-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: xiaoli_legal
+      POSTGRES_USER: xiaoli
+      POSTGRES_PASSWORD: Xiaoli@2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xiaoli"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: xiaoli-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 咨询微服务 (端口 18081)
+  ms-consult:
+    build:
+      context: ../../
+      dockerfile: deployment/docker/Dockerfile.ms-consult
+    container_name: xiaoli-ms-consult
+    restart: always
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=xiaoli_legal
+      - DB_USERNAME=xiaoli
+      - DB_PASSWORD=Xiaoli@2024
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-sk-ab6f6d5baa9349c6a735df32f9cc4f16}
+    ports:
+      - "18081:18081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # 案例微服务 (端口 18083)
+  ms-case:
+    build:
+      context: ../../
+      dockerfile: deployment/docker/Dockerfile.ms-case
+    container_name: xiaoli-ms-case
+    restart: always
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=xiaoli_legal
+      - DB_USERNAME=xiaoli
+      - DB_PASSWORD=Xiaoli@2024
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "18083:18083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # 文书微服务 (端口 18082)
+  ms-document:
+    build:
+      context: ../../
+      dockerfile: deployment/docker/Dockerfile.ms-document
+    container_name: xiaoli-ms-document
+    restart: always
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=xiaoli_legal
+      - DB_USERNAME=xiaoli
+      - DB_PASSWORD=Xiaoli@2024
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "18082:18082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # 前端 Nginx (端口 80)
+  frontend:
+    image: nginx:alpine
+    container_name: xiaoli-frontend
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    depends_on:
+      - ms-consult
+
+networks:
+  default:
+    name: xiaoli-net
+
+volumes:
+  postgres_data:
+  redis_data:
