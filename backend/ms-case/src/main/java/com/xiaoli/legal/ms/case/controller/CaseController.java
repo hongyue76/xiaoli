@@ -402,7 +402,11 @@ public class CaseController {
         }
         
         log.info("法规详情获取完成，成功: {}/{}", 
-            lawList.stream().filter(l -> l.getBoolean("detailSuccess")).count(),
+            java.util.stream.IntStream.range(0, lawList.size())
+                .filter(i -> {
+                    com.alibaba.fastjson2.JSONObject obj = lawList.getJSONObject(i);
+                    return obj != null && Boolean.TRUE.equals(obj.get("detailSuccess"));
+                }).count(),
             lawList.size());
         
         return com.alibaba.fastjson2.JSON.toJSONString(response);
