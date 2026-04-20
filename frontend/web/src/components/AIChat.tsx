@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Input, Button, List, Avatar, Space, Typography, Card, message, Select, Alert } from 'antd';
+import { Input, Button, List, Avatar, Space, Typography, Card, message, Select, Alert, Spin } from 'antd';
 import {
   SendOutlined,
   RobotOutlined,
@@ -7,7 +7,6 @@ import {
   LoadingOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { ProgressBar, LoadingButton } from './LoadingStates';
 import './AIChat.css';
 
 const { TextArea } = Input;
@@ -18,7 +17,8 @@ interface Message {
   type: 'user' | 'ai';
   content: string;
   timestamp: Date;
-  showFull?: boolean;
+  displayContent?: string; // 用于打字机效果
+  isTyping?: boolean;      // 是否正在打字
 }
 
 const AIChat: React.FC = () => {
@@ -27,16 +27,16 @@ const AIChat: React.FC = () => {
       id: '1',
       type: 'ai',
       content: '您好！我是律法先锋法律AI助手，整合了真实案例库和法律知识库，可以为您提供专业的法律咨询服务。请开始提问吧！',
+      displayContent: '您好！我是律法先锋法律AI助手，整合了真实案例库和法律知识库，可以为您提供专业的法律咨询服务。请开始提问吧！',
       timestamp: new Date(),
     },
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [progressPercent, setProgressPercent] = useState(0);
-  const [progressStep, setProgressStep] = useState(0);
-  const [aiModel, setAiModel] = useState<string>('xiaoli');
+  const [aiModel, setAiModel] = useState<string>('deepseek');
   const [showDisclaimer, setShowDisclaimer] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingSpeed = 30; // 打字速度：每字符30ms
 
   // 有用户对话后隐藏免责声明
   const hasUserMessage = messages.some(m => m.type === 'user');
@@ -47,6 +47,37 @@ const AIChat: React.FC = () => {
 
   useEffect(() => {
     scrollToBottom();
+  }, [messages]);
+
+  // 打字机效果
+  useEffect(() => {
+    const typingMessage = messages.find(m => m.isTyping);
+    if (!typingMessage) return;
+
+    const fullContent = typingMessage.content;
+    let currentIndex = typingMessage.displayContent?.length || 0;
+
+    const timer = setInterval(() => {
+      currentIndex++;
+      if (currentIndex >= fullContent.length) {
+        // 打字完成
+        clearInterval(timer);
+        setMessages(prev => prev.map(m => 
+          m.id === typingMessage.id 
+            ? { ...m, displayContent: fullContent, isTyping: false }
+            : m
+        ));
+      } else {
+        // 继续打字
+        setMessages(prev => prev.map(m => 
+          m.id === typingMessage.id 
+            ? { ...m, displayContent: fullContent.substring(0, currentIndex) }
+            : m
+        ));
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(timer);
   }, [messages]);
 
   // DeepSeek AI API调用
@@ -90,6 +121,7 @@ const AIChat: React.FC = () => {
       id: Date.now().toString(),
       type: 'user',
       content: inputValue,
+      displayContent: inputValue,
       timestamp: new Date(),
     };
 
@@ -97,77 +129,22 @@ const AIChat: React.FC = () => {
     const question = inputValue;
     setInputValue('');
     setIsLoading(true);
-    setProgressPercent(0);
-    setProgressStep(0);
-
-    // 模拟进度条动画
-    const progressInterval = setInterval(() => {
-      setProgressPercent(prev => {
-        const newPercent = prev + Math.random() * 15 + 5;
-        return newPercent > 85 ? 85 : newPercent;
-      });
-      setProgressStep(prev => {
-        const newStep = prev + (Math.random() > 0.7 ? 1 : 0);
-        return newStep > 2 ? 2 : newStep;
-      });
-    }, 800);
 
     try {
-      let aiResponse = '';
-
-      if (aiModel === 'xiaoli') {
-        // 使用律法先锋后端API（带案例检索）
-        const response = await fetch('/api/consult/chat', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            messages: [{ role: 'user', content: question }],
-          }),
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          // 兼容后端响应格式：{ code, data: { answer, similarCases } }
-          if (result.data && result.data.answer) {
-            aiResponse = result.data.answer;
-          } else if (result.answer) {
-            aiResponse = result.answer;
-          } else {
-            aiResponse = JSON.stringify(result);
-          }
-        } else {
-          const errorText = await response.text();
-          throw new Error(`后端API调用失败: ${response.status} ${errorText}`);
-        }
-      } else {
-        // 其他模型使用DeepSeek API
-        aiResponse = await callDeepSeekAPI(question);
-      }
+      // 使用 DeepSeek API
+      const aiResponse = await callDeepSeekAPI(question);
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
         content: aiResponse,
+        displayContent: '',
+        isTyping: true,
         timestamp: new Date(),
       };
 
-      // 完成进度
-      setProgressPercent(100);
-      setProgressStep(3);
-
-      setTimeout(() => {
-        const aiMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          type: 'ai',
-          content: aiResponse,
-          timestamp: new Date(),
-        };
-
-        setMessages(prev => [...prev, aiMessage]);
-        setIsLoading(false);
-      }, 500);
+      setMessages(prev => [...prev, aiMessage]);
+      setIsLoading(false);
     } catch (error: any) {
       console.error('API调用失败:', error);
       message.error(error.message || '请求失败，请稍后重试');
@@ -175,13 +152,12 @@ const AIChat: React.FC = () => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
-        content: '抱歉，发生了错误。请尝试切换AI模型或稍后重试。如果使用真实AI，请确保已配置API密钥。',
+        content: '抱歉，发生了错误。请检查网络连接或API配置后重试。',
+        displayContent: '抱歉，发生了错误。请检查网络连接或API配置后重试。',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, errorMessage]);
       setIsLoading(false);
-    } finally {
-      clearInterval(progressInterval);
     }
   };
 
@@ -202,7 +178,6 @@ const AIChat: React.FC = () => {
             onChange={setAiModel}
             style={{ width: 200 }}
           >
-            <Select.Option value="xiaoli">律法先锋 AI</Select.Option>
             <Select.Option value="deepseek">DeepSeek AI</Select.Option>
           </Select>
         </Space>
@@ -231,7 +206,8 @@ const AIChat: React.FC = () => {
                 </div>
                 <Card size="small" className="message-card">
                   <Paragraph className="message-text">
-                    {message.content}
+                    {message.displayContent}
+                    {message.isTyping && <span className="typing-cursor">|</span>}
                   </Paragraph>
                   {message.type === 'ai' && !hasUserMessage && (
                     <Alert
@@ -247,18 +223,11 @@ const AIChat: React.FC = () => {
             </div>
           )}
         />
-        {isLoading && (
+        {isLoading && !messages.some(m => m.isTyping) && (
           <div className="message-item message-ai">
             <Avatar icon={<RobotOutlined />} className="message-avatar avatar-ai" />
             <div className="message-content">
-              <ProgressBar
-                current={progressStep}
-                percent={progressPercent}
-                status="active"
-                showSteps={true}
-                showPercent={true}
-                type="default"
-              />
+              <Spin indicator={<LoadingOutlined style={{ fontSize: 20 }} spin />} />
             </div>
           </div>
         )}

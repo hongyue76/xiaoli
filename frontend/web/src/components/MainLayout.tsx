@@ -25,8 +25,6 @@ import {
 } from '@ant-design/icons';
 import './MainLayout.css';
 
-const { Panel } = Collapse;
-
 interface MainLayoutProps {
   leftContent: React.ReactNode;
   mainContent: React.ReactNode;
@@ -97,7 +95,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   const toggleFavorite = (key: string) => {
     setFavorites(prev => {
       if (prev.includes(key)) {
-        message.remove(key);
+        message.success('已取消收藏');
         return prev.filter(k => k !== key);
       } else {
         message.success('已添加到快捷收藏');
@@ -203,12 +201,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         </div>
 
         <div className="header-center">
-          <Breadcrumb className="header-breadcrumb">
-            <Breadcrumb.Item>
-              <HomeOutlined />
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>{getBreadcrumbItems()}</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb className="header-breadcrumb" items={[
+            { title: <HomeOutlined /> },
+            { title: getBreadcrumbItems() }
+          ]} />
         </div>
 
         <div className="header-right">
@@ -293,7 +289,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                     <div
                       key={item.key}
                       className={`menu-item favorite-item ${location.pathname === item.key ? 'active' : ''}`}
-                      onClick={() => navigate(item.key)}
+                      onClick={() => {
+                        message.info(`正在跳转到${item.label}...`);
+                        navigate(item.key);
+                      }}
                     >
                       <span className="menu-icon">{item.icon}</span>
                       <span className="menu-label">{item.label}</span>
@@ -323,25 +322,27 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                   {!collapsedGroups[group.title] && (
                     <div className="menu-group-items">
                       {group.items.map((item) => (
-                        <Tooltip key={item.key} title={`点击访问${item.label}`} placement="right">
-                          <div
-                            className={`menu-item ${location.pathname === item.key ? 'active' : ''}`}
-                            onClick={() => navigate(item.key)}
-                          >
-                            <span className="menu-icon">{item.icon}</span>
-                            <span className="menu-label">{item.label}</span>
-                            <Button
-                              type="text"
-                              size="small"
-                              icon={favorites.includes(item.key) ? <StarFilled /> : <StarOutlined />}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleFavorite(item.key);
-                              }}
-                              className={`favorite-btn ${favorites.includes(item.key) ? 'favorited' : ''}`}
-                            />
-                          </div>
-                        </Tooltip>
+                        <div
+                          key={item.key}
+                          className={`menu-item ${location.pathname === item.key ? 'active' : ''}`}
+                          onClick={() => {
+                            message.info(`正在跳转到${item.label}...`);
+                            navigate(item.key);
+                          }}
+                        >
+                          <span className="menu-icon">{item.icon}</span>
+                          <span className="menu-label">{item.label}</span>
+                          <Button
+                            type="text"
+                            size="small"
+                            icon={favorites.includes(item.key) ? <StarFilled /> : <StarOutlined />}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite(item.key);
+                            }}
+                            className={`favorite-btn ${favorites.includes(item.key) ? 'favorited' : ''}`}
+                          />
+                        </div>
                       ))}
                     </div>
                   )}
@@ -381,51 +382,53 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                 defaultActiveKey={['ai-chat']}
                 ghost
                 className="sidebar-collapse"
-              >
-                <Panel
-                  header={
-                    <div className="panel-header">
-                      <RobotOutlined />
-                      <span>AI 对话</span>
-                    </div>
+                items={[
+                  {
+                    key: 'ai-chat',
+                    label: (
+                      <div className="panel-header">
+                        <RobotOutlined />
+                        <span>AI 对话</span>
+                      </div>
+                    ),
+                    children: rightContent || (
+                      <div className="ai-chat-placeholder">
+                        <RobotOutlined className="ai-icon" />
+                        <p>AI 助手准备就绪</p>
+                        <p className="hint">您可以随时与AI助手对话</p>
+                      </div>
+                    )
+                  },
+                  {
+                    key: 'history',
+                    label: (
+                      <div className="panel-header">
+                        <FileTextOutlined />
+                        <span>历史记录</span>
+                      </div>
+                    ),
+                    children: (
+                      <div className="history-list">
+                        <p className="empty-hint">暂无历史记录</p>
+                      </div>
+                    )
+                  },
+                  {
+                    key: 'templates',
+                    label: (
+                      <div className="panel-header">
+                        <FileTextOutlined />
+                        <span>文档模板</span>
+                      </div>
+                    ),
+                    children: (
+                      <div className="template-list">
+                        <p className="empty-hint">暂无模板</p>
+                      </div>
+                    )
                   }
-                  key="ai-chat"
-                >
-                  {rightContent || (
-                    <div className="ai-chat-placeholder">
-                      <RobotOutlined className="ai-icon" />
-                      <p>AI 助手准备就绪</p>
-                      <p className="hint">您可以随时与AI助手对话</p>
-                    </div>
-                  )}
-                </Panel>
-                <Panel
-                  header={
-                    <div className="panel-header">
-                      <FileTextOutlined />
-                      <span>历史记录</span>
-                    </div>
-                  }
-                  key="history"
-                >
-                  <div className="history-list">
-                    <p className="empty-hint">暂无历史记录</p>
-                  </div>
-                </Panel>
-                <Panel
-                  header={
-                    <div className="panel-header">
-                      <FileTextOutlined />
-                      <span>文档模板</span>
-                    </div>
-                  }
-                  key="templates"
-                >
-                  <div className="template-list">
-                    <p className="empty-hint">暂无模板</p>
-                  </div>
-                </Panel>
-              </Collapse>
+                ]}
+              />
             </div>
           </aside>
         )}
@@ -487,23 +490,21 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         <Collapse
           defaultActiveKey={['ai-chat']}
           ghost
-        >
-          {rightMenuItems.map((item) => (
-            <Panel
-              header={
-                <div className="panel-header">
-                  {item.icon}
-                  <span>{item.label}</span>
-                </div>
-              }
-              key={item.key}
-            >
+          items={rightMenuItems.map((item) => ({
+            key: item.key,
+            label: (
+              <div className="panel-header">
+                {item.icon}
+                <span>{item.label}</span>
+              </div>
+            ),
+            children: (
               <div className="drawer-content">
                 <p className="empty-hint">暂无内容</p>
               </div>
-            </Panel>
-          ))}
-        </Collapse>
+            )
+          }))}
+        />
       </Drawer>
 
       {/* 左侧收起时的浮动按钮 */}

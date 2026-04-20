@@ -513,13 +513,7 @@ export default function CaseSearchPage() {
                           <Spin size="large" />
                         </div>
                       ) : laws.length === 0 ? (
-                        <EmptyState
-                          illustration="search"
-                          description="请输入关键词检索法规"
-                          onAction={() => {
-                            if (keyword) handleSearchLaws();
-                          }}
-                        />
+                        <Empty description="请输入关键词检索法规" image={Empty.PRESENTED_IMAGE_SIMPLE} />
                       ) : (
                         <List
                           dataSource={laws}

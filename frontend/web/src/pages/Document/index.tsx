@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, Row, Col, Tag, Button, Modal, Form, Input, Select, Spin, message, Empty } from 'antd';
 import { FileTextOutlined, PlusOutlined, EditOutlined, DownloadOutlined } from '@ant-design/icons';
 import { documentAPI } from '@/services/api';
+import EmptyState from '@/components/EmptyState';
 import type { CSSProperties } from 'react';
 
 const { Option } = Select;
@@ -107,10 +108,7 @@ export default function DocumentPage() {
           <Spin size="large" />
         </div>
       ) : templates.length === 0 ? (
-        <EmptyState
-          illustration="document"
-          onAction={() => loadTemplates()}
-        />
+        <Empty description="暂无模板" image={Empty.PRESENTED_IMAGE_SIMPLE} />
       ) : (
         <Row gutter={[16, 16]}>
           {templates.map((template) => (

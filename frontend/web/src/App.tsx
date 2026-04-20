@@ -26,8 +26,9 @@ const ThemePreview = lazy(() => import('./pages/ThemePreview'));
 
 // 加载中组件
 const LoadingFallback = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '100px 0' }}>
-    <Spin size="large" tip="加载中..." />
+  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '100px 0', gap: 16 }}>
+    <Spin size="large" />
+    <span style={{ color: '#666' }}>加载中...</span>
   </div>
 );
 
@@ -39,8 +40,7 @@ function App() {
   const renderMainContent = () => {
     return (
       <Suspense fallback={<LoadingFallback />}>
-        <AnimatedRoutes type="slide-up" duration={300}>
-          <Routes>
+        <Routes>
             <Route path="/" element={
               <div>
                 <h2>欢迎使用律法先锋法律AI助手</h2>
@@ -87,7 +87,6 @@ function App() {
               </div>
             } />
           </Routes>
-        </AnimatedRoutes>
       </Suspense>
     );
   };

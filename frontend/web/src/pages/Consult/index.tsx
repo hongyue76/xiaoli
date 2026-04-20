@@ -238,7 +238,7 @@ export default function ConsultPage() {
             </span>
           }
           style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-          bodyStyle={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 0 }}
+          styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column', padding: 0 } }}
         >
           <div style={styles.messageList}>
             {messages.length === 0 ? (

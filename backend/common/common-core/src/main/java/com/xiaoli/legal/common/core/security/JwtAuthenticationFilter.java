@@ -121,9 +121,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 不需要认证的路径
         return path.startsWith("/api/auth/") ||        // 认证相关
                path.startsWith("/api/public/") ||      // 公开接口
-               path.startsWith("/actuator/") ||         // 监控接口
-               path.startsWith("/swagger") ||           // Swagger
-               path.startsWith("/v3/api-docs") ||       // API 文档
+               path.startsWith("/api/consult/") ||     // 法律咨询
+               path.startsWith("/api/document/") ||    // 文书服务
+               path.startsWith("/api/case/") ||        // 案例检索
+               path.startsWith("/api/contract/") ||   // 合同审查
+               path.startsWith("/api/decision/") ||   // 司法决策
+               path.startsWith("/api/compliance/") || // 企业合规
+               path.startsWith("/api/speech/") ||     // 语音对话
+               path.startsWith("/api/evidence/") ||   // 证据管理
+               path.startsWith("/api/analysis/") ||   // 分析服务
+               path.startsWith("/actuator/") ||        // 监控接口
+               path.startsWith("/swagger") ||         // Swagger
+               path.startsWith("/v3/api-docs") ||     // API 文档
+               path.startsWith("/webjars/") ||         // Web资源
                path.equals("/error");                   // 错误页面
     }
 }

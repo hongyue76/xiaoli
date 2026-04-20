@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Card, Upload, Button, Steps, Alert, List, Tag, Progress, message, Row, Col, Statistic, Divider } from 'antd';
+import { Card, Upload, Button, Steps, Alert, List, Tag, Progress, message, Row, Col, Statistic, Divider, Empty } from 'antd';
 import { UploadOutlined, FileTextOutlined, CheckCircleOutlined, WarningOutlined, DownloadOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import EmptyState from '@/components/EmptyState';
 import type { UploadProps } from 'antd';
 import type { CSSProperties } from 'react';
 

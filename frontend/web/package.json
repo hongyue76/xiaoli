@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "dev:mock": "vite --config vite.mock.config.ts",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx",

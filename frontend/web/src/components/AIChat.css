@@ -122,6 +122,26 @@
   text-align: left;
 }
 
+/* 打字机光标 */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: var(--color-primary);
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 .loading-card {
   padding: 16px 20px;
   min-width: 120px;
