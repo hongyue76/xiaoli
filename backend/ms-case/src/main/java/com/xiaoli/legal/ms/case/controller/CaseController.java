@@ -402,13 +402,15 @@ public class CaseController {
             }
         }
         
-        log.info("法规详情获取完成，成功: {}/{}", 
-            java.util.stream.IntStream.range(0, lawList.size())
-                .filter(i -> {
-                    com.alibaba.fastjson2.JSONObject obj = lawList.getJSONObject(i);
-                    return obj != null && Boolean.TRUE.equals(obj.get("detailSuccess"));
-                }).count(),
-            lawList.size());
+        // 统计成功数量
+        long successCount = 0;
+        for (int i = 0; i < lawList.size(); i++) {
+            com.alibaba.fastjson2.JSONObject obj = lawList.getJSONObject(i);
+            if (obj != null && Boolean.TRUE.equals(obj.get("detailSuccess"))) {
+                successCount++;
+            }
+        }
+        log.info("法规详情获取完成，成功: {}/{}", successCount, lawList.size());
         
         return com.alibaba.fastjson2.JSON.toJSONString(response);
     }
