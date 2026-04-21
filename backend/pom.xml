@@ -170,6 +170,7 @@
                         <target>17</target>
                         <encoding>UTF-8</encoding>
                         <fork>true</fork>
+                        <parameters>true</parameters>
                     </configuration>
                 </plugin>
                 <plugin>

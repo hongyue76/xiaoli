@@ -1,0 +1,46 @@
+version: '3.8'
+
+# ===========================================
+# 律法先锋 - 本地开发一键启动
+# 
+# 使用方式:
+#   1. 解压项目压缩包
+#   2. 确保已安装 Docker Desktop
+#   3. 双击运行 quick-start.bat
+#   或手动运行: docker-compose -f docker-compose.local.yml up -d
+# ===========================================
+
+services:
+  # 数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: xiaoli-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: xiaoli_legal
+      POSTGRES_USER: xiaoli
+      POSTGRES_PASSWORD: Xiaoli@2024
+    volumes:
+      - ./docker/init/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xiaoli"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: xiaoli-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -22,26 +22,30 @@ CREATE TABLE IF NOT EXISTS sys_user (
 
 -- ==================== 法律咨询相关表 ====================
 
--- 咨询会话表
-CREATE TABLE IF NOT EXISTS consult_conversation (
+-- 咨询会话表 (与Java实体ConsultConversation匹配)
+CREATE TABLE IF NOT EXISTS consult_conversations (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT,
-    title VARCHAR(200),
-    session_type VARCHAR(30) DEFAULT 'CONSULT',
+    title VARCHAR(255),
+    conversation_type VARCHAR(50) DEFAULT 'GENERAL',
     status VARCHAR(20) DEFAULT 'ACTIVE',
-    message_count INT DEFAULT 0,
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted INTEGER DEFAULT 0
 );
 
--- 咨询消息表
-CREATE TABLE IF NOT EXISTS consult_message (
+-- 咨询消息表 (与Java实体ConsultMessage匹配)
+CREATE TABLE IF NOT EXISTS consult_messages (
     id BIGSERIAL PRIMARY KEY,
-    conversation_id BIGINT NOT NULL,
-    role VARCHAR(20) NOT NULL,
-    content TEXT NOT NULL,
+    conversation_id BIGINT,
+    role VARCHAR(50),
+    content TEXT,
+    message_type VARCHAR(20) DEFAULT 'TEXT',
+    reference_knowledge TEXT,
+    reference_case TEXT,
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (conversation_id) REFERENCES consult_conversation(id)
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted INTEGER DEFAULT 0
 );
 
 -- ==================== 法律文书相关表 ====================
@@ -335,15 +339,15 @@ ON sys_user(status);
 
 -- 用户查询历史记录：用户ID + 创建时间 联合索引
 CREATE INDEX IF NOT EXISTS idx_consult_user_created 
-ON consult_conversation(user_id, create_time DESC);
+ON consult_conversations(user_id, create_time DESC);
 
 -- 会话状态索引：用于筛选活跃会话
 CREATE INDEX IF NOT EXISTS idx_consult_status 
-ON consult_conversation(status);
+ON consult_conversations(status);
 
 -- 消息创建时间索引：用于按时间查询消息
 CREATE INDEX IF NOT EXISTS idx_consult_message_created 
-ON consult_message(create_time DESC);
+ON consult_messages(create_time DESC);
 
 -- ==================== 法律文书表索引 ====================
 
@@ -457,7 +461,7 @@ CREATE INDEX IF NOT EXISTS idx_speech_user_status
 ON speech_session(user_id, status);
 
 -- 消息原有索引
-CREATE INDEX IF NOT EXISTS idx_consult_conv ON consult_message(conversation_id);
+CREATE INDEX IF NOT EXISTS idx_consult_conv ON consult_messages(conversation_id);
 CREATE INDEX IF NOT EXISTS idx_speech_session ON speech_message(session_id);
 
 -- 插入默认管理员用户

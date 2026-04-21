@@ -83,6 +83,13 @@ application-dev.properties
 deployment/docker/data/
 deployment/docker/logs/
 
+# ============ 敏感文件 ============
+siyao/
+*.pem
+*.key
+id_rsa*
+*.secret
+
 # ============ 其他 ============
 *.bak
 *.orig

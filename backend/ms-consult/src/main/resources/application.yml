@@ -72,32 +72,32 @@ mybatis-plus:
 # AI服务配置
 xiaoli:
   api:
-    base-url: ${XIAOLI_API_BASE_URL:https://api.xiaoli.ai}
-    key: ${XIAOLI_API_KEY:your-api-key}
-    model: ${XIAOLI_API_MODEL:xiaoli-legal}
+    base-url: ${XIAOLI_API_BASE_URL:}
+    key: ${XIAOLI_API_KEY:}
+    model: ${XIAOLI_API_MODEL:}
     timeout: 30000
 
-# DeepSeek AI配置
+# DeepSeek AI配置（必须配置环境变量）
 deepseek:
   api:
     url: ${DEEPSEEK_API_URL:https://api.deepseek.com/v1}
-    key: ${DEEPSEEK_API_KEY:sk-ab6f6d5baa9349c6a735df32f9cc4f16}
+    key: ${DEEPSEEK_API_KEY:}
     model: ${DEEPSEEK_MODEL:deepseek-chat}
-    timeout: ${DEEPSEEK_TIMEOUT:60}
+    timeout: ${DEEPSEEK_TIMEOUT:120}
 
-# 得理法搜API配置
+# 得理法搜API配置（必须配置环境变量）
 delilegal:
   base-url: ${DELILEGAL_BASE_URL:https://openapi.delilegal.com}
-  app-id: ${DELILEGAL_APP_ID:QthdBErlyaYvyXul}
-  secret: ${DELILEGAL_SECRET:EC5D455E6BD348CE8E18BE05926D2EBE}
+  app-id: ${DELILEGAL_APP_ID:}
+  secret: ${DELILEGAL_SECRET:}
   timeout: 30000
 
 # 腾讯元器智能体配置
 tencent:
   yuanqi:
-    base-url: ${TENCENT_YUANQI_BASE_URL:https://api.yuanqi.tencent.com}
-    assistant-id: ${TENCENT_YUANQI_ASSISTANT_ID:your-assistant-id}
-    token: ${TENCENT_YUANQI_TOKEN:your-token}
+    base-url: ${TENCENT_YUANQI_BASE_URL:}
+    assistant-id: ${TENCENT_YUANQI_ASSISTANT_ID:}
+    token: ${TENCENT_YUANQI_TOKEN:}
     timeout: 60000
 
 # 案例检索服务配置
@@ -118,6 +118,6 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
   file:
-    name: logs/${spring.application.name}.log
+    name: ../logs/${spring.application.name}.log
     max-size: 100MB
     max-history: 30

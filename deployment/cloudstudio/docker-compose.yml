@@ -50,7 +50,7 @@ services:
       - DB_PASSWORD=Xiaoli@2024
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-sk-ab6f6d5baa9349c6a735df32f9cc4f16}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
     ports:
       - "18081:18081"
     depends_on:

@@ -62,9 +62,9 @@ mybatis-plus:
 
 tencent:
   yuanqi:
-    base-url: ${TENCENT_YUANQI_BASE_URL:https://api.yuanqi.tencent.com}
-    assistant-id: ${TENCENT_YUANQI_ASSISTANT_ID:your-assistant-id}
-    token: ${TENCENT_YUANQI_TOKEN:your-token}
+    base-url: ${TENCENT_YUANQI_BASE_URL:}
+    assistant-id: ${TENCENT_YUANQI_ASSISTANT_ID:}
+    token: ${TENCENT_YUANQI_TOKEN:}
     timeout: 60000
 
 file:
@@ -80,6 +80,6 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId}] %logger{36} - %msg%n"
   file:
-    name: logs/${spring.application.name}.log
+    name: ../logs/${spring.application.name}.log
     max-size: 100MB
     max-history: 30
