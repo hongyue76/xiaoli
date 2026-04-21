@@ -80,36 +80,31 @@ const AIChat: React.FC = () => {
     return () => clearInterval(timer);
   }, [messages]);
 
-  // DeepSeek AI API调用
-  const callDeepSeekAPI = async (question: string) => {
+  // 调用后端法律咨询API
+  const callBackendAPI = async (question: string) => {
     try {
-      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      const response = await fetch('/api/consult/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer sk-ab6f6d5baa9349c6a735df32f9cc4f16',
         },
         body: JSON.stringify({
-          model: 'deepseek-chat',
           messages: [
-            {
-              role: 'system',
-              content: '你是一个专业的法律AI助手，擅长解答各类法律问题。请用专业、准确、易懂的语言回答用户的问题。'
-            },
             {
               role: 'user',
               content: question
             }
           ],
-          temperature: 0.7,
-          max_tokens: 2000,
         }),
       });
 
       const data = await response.json();
-      return data.choices[0]?.message?.content || '抱歉，无法获取回复。';
+      if (data.success && data.data) {
+        return data.data.answer || '抱歉，无法获取回复。';
+      }
+      throw new Error(data.message || '服务异常');
     } catch (error) {
-      console.error('DeepSeek API调用失败:', error);
+      console.error('后端API调用失败:', error);
       throw error;
     }
   };
@@ -131,8 +126,8 @@ const AIChat: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // 使用 DeepSeek API
-      const aiResponse = await callDeepSeekAPI(question);
+      // 使用后端API
+      const aiResponse = await callBackendAPI(question);
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),

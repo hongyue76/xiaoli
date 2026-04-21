@@ -1,42 +1,102 @@
-# 律法先锋 - 5分钟快速上手指南
+# 律法先锋 - 快速上手指南
 
-## 🎯 一句话说明
+## 一句话说明
 
-**律法先锋**是一个法律AI助手，能帮你：法律咨询、查案例、审合同、写文书。
+**律法先锋**是一个法律AI助手，能帮你：法律咨询、查案例、审合同，写文书。
 
 ---
 
-## 📍 服务器信息
+## 你有两个选择
+
+| 方式 | 优点 | 适合场景 |
+|------|------|---------|
+| **服务器部署** | 外网可访问 | 演示给客户 |
+| **本地运行** | 简单快速 | 开发调试、个人使用 |
+
+---
+
+# 方式A：本地运行（推荐新手）
+
+如果服务器连不上，用这个方法！
+
+### 环境要求
+
+- JDK 17+
+- Node.js 18+
+- PostgreSQL 15+（或使用Docker）
+- Redis 7+
+
+### 第一步：安装数据库（用Docker最简单）
+
+如果没有安装PostgreSQL和Redis，运行：
+
+```bash
+# Windows PowerShell (管理员)
+docker run -d --name xiaoli-postgres -e POSTGRES_DB=xiaoli_legal -e POSTGRES_USER=xiaoli -e POSTGRES_PASSWORD=Xiaoli@2024 -p 5432:5432 postgres:15
+
+docker run -d --name xiaoli-redis -p 6379:6379 redis:7-alpine
+```
+
+### 第二步：一键启动
+
+双击运行项目根目录的：
+```
+start-all.bat
+```
+
+等待几分钟后，浏览器会自动打开 http://localhost:3000
+
+### 第三步：确认运行成功
+
+看到前端页面说明成功了！
+
+### 常见问题
+
+| 问题 | 解决方法 |
+|------|---------|
+| Docker未运行 | 启动Docker Desktop |
+| 端口被占用 | 停止其他占用5432、6379端口的程序 |
+| 前端打不开 | 检查Node.js是否安装成功 |
+
+---
+
+# 方式B：服务器部署
+
+## 服务器信息
 
 | 项目 | 值 |
 |------|-----|
-| 服务器IP | 101.42.47.231 |
-| SSH端口 | 22 |
-| 用户名 | ubuntu |
-| 私钥文件 | 参考之前的配置 |
+| 服务器IP | `101.42.47.231` |
+| SSH端口 | `22` |
+| 用户名 | `ubuntu` |
 
 ---
 
-## 🚀 第一步：连接服务器
+## 第一步：连接服务器
+
+### 如果你有私钥文件
 
 打开终端/PowerShell，运行：
 
 ```bash
-ssh -i 你的私钥文件路径 ubuntu@101.42.47.231
+ssh -i C:\Users\你的用户名\.ssh\your-key.pem ubuntu@101.42.47.231
 ```
 
-**不会连接？** 私钥需要先设置权限：
-```bash
-# Windows PowerShell
-icacls 私钥文件路径 /inheritance:r /grant:r "$env:USERNAME:R"
+**Windows设置私钥权限：**
+```powershell
+icacls C:\Users\你的用户名\.ssh\your-key.pem /inheritance:r /grant:r "$env:USERNAME:R"
+```
 
-# Linux/Mac
-chmod 400 私钥文件路径
+### 如果你用密码登录
+
+```bash
+ssh ubuntu@101.42.47.231
+# 然后输入密码提示
 ```
 
 ---
 
-## 🚀 第二步：一键启动所有服务
+## 第二步：一键启动所有服务
 
 连接服务器后，**复制粘贴这条命令**：
 
@@ -74,16 +134,11 @@ nohup java -Xms256m -Xmx512m -jar /opt/xiaoli/backend/ms-case/target/ms-caseinfo
   --spring.datasource.password=Xiaoli@2024 \
   > /opt/xiaoli/logs/case.log 2>&1 &
 
-echo "✅ 所有服务启动中..."
-
-# 等待10秒后检查状态
-sleep 10
-curl -s http://localhost:18081/actuator/health
-curl -s http://localhost:18082/actuator/health
-curl -s http://localhost:18083/actuator/health
+echo "所有服务启动中，等待15秒..."
+sleep 15
 ```
 
-保存为 `start-all.sh`：
+**保存脚本：**
 ```bash
 nano /opt/xiaoli/start-all.sh
 # 粘贴内容后按 Ctrl+X，再按 Y 保存
@@ -92,7 +147,7 @@ chmod +x /opt/xiaoli/start-all.sh
 
 ---
 
-## ✅ 第三步：确认服务正常
+## 第三步：确认服务正常
 
 **复制粘贴这条命令：**
 
@@ -106,7 +161,7 @@ curl -s http://localhost:18081/actuator/health
 
 ---
 
-## 🌐 第四步：开放防火墙（只需做一次）
+## 第四步：开放防火墙（只需做一次）
 
 1. 打开浏览器访问：https://console.cloud.tencent.com/lighthouse
 2. 登录账号
@@ -118,7 +173,7 @@ curl -s http://localhost:18081/actuator/health
 
 ---
 
-## 📱 第五步：使用服务
+## 第五步：使用服务
 
 在浏览器中打开：
 
@@ -130,7 +185,7 @@ curl -s http://localhost:18081/actuator/health
 
 ---
 
-## 💬 第六步：测试AI对话（快速验证）
+## 第六步：测试AI对话（快速验证）
 
 **复制粘贴这条命令：**
 
@@ -140,11 +195,11 @@ curl -X POST http://localhost:18081/api/consult/chat \
   -d '{"messages":[{"role":"user","content":"你好，我想咨询劳动纠纷问题"}]}'
 ```
 
-**看到回复的JSON就是成功了！** 🎉
+**看到回复的JSON就是成功了！**
 
 ---
 
-## 🔧 常用操作（收藏备用）
+## 服务器常用操作
 
 ### 查看服务是否在运行
 ```bash
@@ -178,22 +233,23 @@ mvn clean package -DskipTests
 
 ---
 
-## ❓ 常见问题
+## 常见问题
 
 | 问题 | 解决方法 |
 |------|---------|
-| 连不上服务器 | 检查私钥权限是否正确设置 |
+| 服务器连不上 | 检查SSH连接是否正确，私钥权限是否设置 |
 | curl报错Connection refused | 服务启动中，等15秒再试 |
 | 端口访问不了 | 去腾讯云控制台开放防火墙端口 |
 | 内存不足 | 减少 -Xms 和 -Xmx 的值（改成128m） |
+| 本地Docker报错 | 确保Docker Desktop已启动 |
 
 ---
 
-## 📞 快速联系
+## 快速联系
 
 - 服务器IP：**101.42.47.231**
 - 主要端口：**18081**（咨询）、**18082**（文书）、**18083**（案例）
 
 ---
 
-**搞定！有任何问题随时问。** 🎉
+**搞定！有任何问题随时问。**
